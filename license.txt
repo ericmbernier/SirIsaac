@@ -1,0 +1,1 @@
+GPL (General Public License). You can distribute modified versions of the source code, but they must also be open source under the GPL. The game graphics can be redistributed for free, but cannot be resold without our permission. The music and sound cannot be redistributed, nor sold under any circumstances.
