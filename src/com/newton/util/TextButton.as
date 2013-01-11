@@ -11,6 +11,8 @@ package com.newton.util
 {
 	import com.newton.Assets;
 	import com.newton.Global;
+	import com.newton.worlds.GameWorld;
+	import com.newton.worlds.TransitionWorld;
 	
 	import flash.events.MouseEvent;
 	import flash.geom.ColorTransform;
@@ -47,7 +49,7 @@ package com.newton.util
 		
 		private var rollOverSnd_:Sfx;
 		private var playRollOverSnd_:Boolean = false;
-
+		
 		private var selectSnd_:Sfx;
 		private var playSelectSnd_:Boolean = false;
 		
@@ -62,12 +64,15 @@ package com.newton.util
 		private var tf:ColorTransform = new ColorTransform();
 		private var rate:Number = 1;
 		
-		public var changeColor_:Boolean = true;
+		public var changeColor_:Boolean = false;
 		public var hasBg_:Boolean = false;
 		
+		private var textSize_:int = 12;
+		
+		private var levelNum_:int = -1;
 		
 		public function TextButton(text:Text, x:Number=0, y:Number=0, width:int=0, height:int=0, 
-							   callback:Function=null)
+								   callback:Function=null, levelNum:int = -1)
 		{
 			super(x, y);
 			
@@ -79,6 +84,10 @@ package com.newton.util
 			
 			_normal = text;
 			graphic = _normal;
+			
+			textSize_ = text.size;
+			
+			levelNum_ = levelNum;
 		}
 		
 		
@@ -96,7 +105,7 @@ package com.newton.util
 			if(collidePoint(x, y, Input.mouseX, Input.mouseY))
 			{
 				Mouse.cursor = MouseCursor.BUTTON;
-
+				
 				if(Input.mousePressed)
 				{
 					if(graphic != _down || _downChanged)
@@ -109,14 +118,14 @@ package com.newton.util
 				{
 					if (hasBg_)
 					{						
-						_normal.size = Global.TEXT_BTN_HOVER;
+						_normal.size = textSize_ + 2;
 						_gfx = new Graphiclist(_bg, _normal);
 						graphic = _gfx;
 					}
 					else
 					{
 						graphic = _hover;
-						_hover.size = Global.TEXT_BTN_HOVER;
+						_hover.size = textSize_ + 2;
 						_hover.visible = true;
 						_normal.visible = false;
 					}
@@ -134,13 +143,13 @@ package com.newton.util
 			{
 				Mouse.cursor = MouseCursor.ARROW;
 				
-				_normal.size = Global.TEXT_BTN_NORMAL;
+				_normal.size = textSize_;
 				_normal.visible = true;
-
+				
 				if (!hasBg_)
 				{
 					_hover.visible = false;
-					_hover.size = Global.TEXT_BTN_NORMAL;
+					_hover.size = textSize_;
 				}
 				
 				graphic = _normal;
@@ -182,7 +191,7 @@ package com.newton.util
 		
 		private function onMouseUp(e:MouseEvent=null):void
 		{
-			if (!shouldCall || (callback == null)) 
+			if (!shouldCall || (callback == null && levelNum_ < 0)) 
 			{
 				return;
 			}
@@ -194,7 +203,21 @@ package com.newton.util
 					selectSnd_.play(Global.soundVolume);	
 				}
 				
-				callback();
+				if (levelNum_ > 0)
+				{
+					//------------------------------------------------------------------------------
+					// Load the selected level, subtracting one to account for the nextLevel call
+					// in our GameWorld class
+					//------------------------------------------------------------------------------
+					Global.level = levelNum_ - 1;
+					FP.world.removeAll();
+					FP.world = new TransitionWorld(GameWorld);
+				}
+				else
+				{
+					callback();
+					
+				}
 			}
 		}
 		
@@ -242,7 +265,7 @@ package com.newton.util
 			rollOverSnd_ = sound;
 			playRollOverSnd_ = true;
 		}
-
+		
 		
 		public function setSelectSound(sound:Sfx):void
 		{
@@ -275,4 +298,3 @@ package com.newton.util
 		}
 	}
 }
-

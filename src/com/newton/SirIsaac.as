@@ -28,7 +28,7 @@ package com.newton
 	 */
 	public class SirIsaac extends Sprite
 	{
-		private static const mainClassName: String = "com.cbc.Main";
+		private static const mainClassName: String = "com.newton.Main";
 		
 		private static const WIDTH:uint = 640;
 		private static const HEIGHT:uint = 480;
@@ -45,27 +45,18 @@ package com.newton
 		[Embed(source = 'assets/fonts/Essays1743.ttf', embedAsCFF="false", fontFamily = 'Essays')]
 		private static const FONT:Class;
 		
-		// TODO: Update these!
 		[Embed("assets/graphics/preloaderBg.png")] private var bgPattern:Class;
 		private var bgImg_:Bitmap = new bgPattern;
 		[Embed("assets/graphics/titleLogo.png")] private var logo:Class;
 		private var logo_:Bitmap = new logo;	
 		
-		// Embed the social media icons 
 		[Embed("assets/graphics/ebLogo.png")] private var ebLogo:Class;
 		private var ebLogo_:Bitmap = new ebLogo;
+		private var ebClip_:MovieClip = new MovieClip();
 		
-		[Embed("assets/graphics/twitter.png")] private var twitter:Class;
-		private var twitter_:Bitmap = new twitter;
-		
-		[Embed("assets/graphics/facebook.png")] private var facebook:Class;
-		private var facebook_:Bitmap = new facebook;
-		
-		[Embed("assets/graphics/youtube.png")] private var youtube:Class;
-		private var youtube_:Bitmap = new youtube;
-		
-		[Embed("assets/graphics/googleplus.png")] private var googleplus:Class;
-		private var googleplus_:Bitmap = new googleplus;
+		[Embed("assets/graphics/oneGame.png")] private var oneGameLogo:Class;
+		private var oneGameLogo_:Bitmap = new oneGameLogo;
+		private var oneGameClip_:MovieClip = new MovieClip();
 		
 		[Embed("assets/graphics/playButton.png")] private var playBtn:Class;
 		private var playBtn_:Bitmap = new playBtn;
@@ -93,23 +84,8 @@ package com.newton
 		private var loadPreloader_:Boolean = true;
 		private var linkAdded_:Boolean = false;
 		private var playBtnLoaded_:Boolean = false;
-		
-		/*
-		[Embed("assets/intro.swf")] private var splash:Class;
-		private var splash_:MovieClip;
-		private var playSplash_:Boolean = true;
-		private var playingSplash_:Boolean = false;
-		private var loadedOnce_:Boolean = false;
-		private const SPLASH_FRAMES:int = 30;
-		private var splashFrames_:int = 0;
-		*/
-		
-		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
+
+				
 		public function SirIsaac()
 		{	
 			// Log the entry to PlayTomic
@@ -120,11 +96,6 @@ package com.newton
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
 		private function init():void
 		{	
 			sw = stage.stageWidth;
@@ -138,30 +109,22 @@ package com.newton
 			this.addChild(bgImg_);
 			
 			this.addChild(logo_);
-			logo_.x = 200;
+			logo_.x = 60;
 			logo_.y = 90;
 			TweenMax.from(logo_, 0.85, {y: -200, ease:Bounce.easeOut, delay:0, onComplete:null});		
+
+			this.addChild(oneGameLogo_);
+			oneGameLogo_.scaleX = 0.65;
+			oneGameLogo_.scaleY = 0.65;
+			oneGameLogo_.x = 75;
+			oneGameLogo_.y = 5;
+			TweenMax.from(oneGameLogo_, 1.1, {y: -200, ease:Cubic.easeOut, delay:0, onComplete:setupButtons});
 			
 			this.addChild(ebLogo_);
-			ebLogo_.x = 25;
-			ebLogo_.y = 25;
-			TweenMax.from(ebLogo_, 1.1, {y: -200, ease:Cubic.easeOut, delay:0, onComplete:null});
-			
-			this.addChild(twitter_);
-			twitter_.x = 95;
-			twitter_.y = 25;
-			TweenMax.from(twitter_, 1.1, {y: -200, ease:Cubic.easeOut, delay:0, onComplete:null});
-			
-			this.addChild(facebook_);
-			facebook_.x = 130;
-			facebook_.y = 25;
-			TweenMax.from(facebook_, 1.1, {y: -200, ease:Cubic.easeOut, delay:0, onComplete:null});
-			
-			this.addChild(googleplus_);
-			googleplus_.x = 165;
-			googleplus_.y = 25;
-			TweenMax.from(googleplus_, 1.1, {y: -200, ease:Cubic.easeOut, delay:0, onComplete:null});
-			
+			ebLogo_.x = 215;
+			ebLogo_.y = 325;
+			TweenMax.from(ebLogo_, 1.1, {y: 490, ease:Cubic.easeOut, delay:0, onComplete:null});
+						
 			px = (sw - w) * 0.5;
 			py = (sh - h) * 0.5 + 50;
 			
@@ -178,23 +141,10 @@ package com.newton
 			graphics.endFill();
 			progressBar = new Shape();
 			addChild(progressBar);
-			TweenMax.from(progressBar, 0.35, {x: -300, ease:Quad.easeIn, delay:0, onComplete:null});	
-			
-			/*
-			splash_ = MovieClip(new splash());
-			splash_.scaleX = 0.80;
-			splash_.scaleY = 0.80;
-			this.addChild(splash_);
-			splash_.play();
-			*/
+			TweenMax.from(progressBar, 0.35, {x: -300, ease:Quad.easeIn, delay:0, onComplete:null});
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
 		public function onEnterFrame (e:Event):void
 		{ 
 			if (loadPreloader_)
@@ -216,8 +166,8 @@ package com.newton
 						progressBar.x = 800;
 						TweenMax.from(progressBar, 0.75, {x:175, ease:null, delay:0, onComplete:null});
 						
-						playBtn_.x = 290;
-						playBtn_.y = 270;
+						playBtn_.x = 252;
+						playBtn_.y = 220;
 						TweenMax.from(playBtn_, 0.75, {x: -200, ease:Back.easeOut, delay:0, onComplete:null});
 						
 						playBtnClip_.addChild(playBtn_);
@@ -241,22 +191,12 @@ package com.newton
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
 		private function hasLoaded ():Boolean 
 		{
 			return (loaderInfo.bytesLoaded >= loaderInfo.bytesTotal);
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
 		private function onMouseDown(e:MouseEvent):void 
 		{
 			if (hasLoaded())
@@ -266,11 +206,6 @@ package com.newton
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
 		private function playGame (): void 
 		{	
 			stage.removeEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -281,39 +216,31 @@ package com.newton
 			parent.removeChild(this);
 		}
 		
-		
-		/*******************************************************************************************
-		 * Method: 
-		 * 
-		 * Description: 
-		 ******************************************************************************************/
-		private function finishedAds():void
+
+		private function goToOneGameAMonthSite(e:MouseEvent):void
 		{
-			adsFinished_ = true;
-		}
-		
-		
-		/*******************************************************************************************
-		 * Method: goToSponsorSite
-		 * 
-		 * Description: Callback method that will navigate to sponsor's site
-		 ******************************************************************************************/
-		private function goToSponsorSite(e:Event):void
-		{
-			var url:String = new String("http://www.ericbernier.com");
+			var url:String = new String("http://www.onegameamonth.com");
 			navigateToURL(new URLRequest(url));
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method: goToEricBernier
-		 * 
-		 * Description: Callback method that will navigate to sponsor's site
-		 ******************************************************************************************/
-		private function goToEricBernier(e:Event):void
+		private function goToMySite(e:MouseEvent):void
 		{
-			var url:String = new String("http://www.ericbernier.com");
+			var url:String = new String("http://www.twitter.com/ericmbernier");
 			navigateToURL(new URLRequest(url));
+		}
+		
+		
+		private function setupButtons():void
+		{
+			ebClip_.addChild(ebLogo_);
+			oneGameClip_.addChild(oneGameLogo_);
+			
+			ebClip_.addEventListener(MouseEvent.CLICK, goToMySite);
+			oneGameClip_.addEventListener(MouseEvent.CLICK, goToOneGameAMonthSite);
+			
+			this.addChild(ebClip_);
+			this.addChild(oneGameClip_);
 		}
 	}
 }

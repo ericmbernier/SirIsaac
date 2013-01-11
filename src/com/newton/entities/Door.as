@@ -61,14 +61,7 @@ package com.newton.entities
 					{
 						doorSnd_.play(Global.soundVolume);
 						
-						if (Global.displayLevelComplete)
-						{
-							Global.levelComplete = true;
-						}
-						else
-						{
-							Global.finished = true;
-						}
+						Global.finished = true;
 					}
 				}
 			}

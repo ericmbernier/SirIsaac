@@ -1,5 +1,6 @@
 ﻿package com.newton
 {
+	import com.newton.Global;
 	import com.newton.worlds.TitleWorld;
 	import com.newton.worlds.TransitionWorld;
 	
@@ -29,7 +30,7 @@
 		{
 			super(WIDTH, HEIGHT, FPS, false);
 			
-			FP.console.enable();
+			// FP.console.enable();
 		}
 		
 
@@ -42,10 +43,8 @@
 		{
 			if (this.checkDomain("ericbernier.com"))
 			{	
-				// TODO: Make a title buffer as FP.buffer is blank here it seems
-				// var screen:Image = new Image(Assets.TITLE_BUFFER);
-				var screen:Image = new Image(FP.buffer);
-				FP.world = new TransitionWorld(TitleWorld, screen);
+				var screen:Image = new Image(Assets.TITLE_BUFFER);
+				FP.world = new TransitionWorld(TitleWorld, screen, Global.CIRCLE);
 				super.init();
 			}
 			else

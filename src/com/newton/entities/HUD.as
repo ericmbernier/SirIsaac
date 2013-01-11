@@ -1,5 +1,7 @@
 package com.newton.entities
 {
+	import Playtomic.*;
+	
 	import com.newton.Assets;
 	import com.newton.Global;
 	import com.newton.util.Button;
@@ -16,86 +18,69 @@ package com.newton.entities
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.graphics.Text;
-
-	import Playtomic.*;
-
+	
+	
 	/**
 	 * 
 	 * @author Eric Bernier <http://www.ericbernier.com>
 	 */
 	public class HUD extends Entity
-	{
-		private var sprite:Spritemap = new Spritemap(Assets.COLLECT_COIN, 12, 12, null);
+	{	
+		private var levelTxt_:Text = new Text("Level", 10, 3, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:3, font:"Bangers"});
+		private var levelNum_:Text = new Text("0", 40, 3, {size:16, 
+			outlineColor:0x000000, outlineStrength:3, font:"Bangers"});
+		private var levelName_:Text = new Text("The Forest", 50, 3, {size:16, 
+			outlineColor:0x000000, outlineStrength:3, font:"Bangers"});
 		
-		private var coinsTxt_:Text = new Text("x", 590, 5, {size:16, color:0xFFFFFF, 
-				outlineColor:0x000000, outlineStrength:3});
-		private var coinsNum_:Text = new Text(Global.coinsCollected.toString(), 620, 5, {size:16, 
-				outlineColor:0x000000, outlineStrength:3});
+		private var pauseTxt_:Text = new Text("[P]ause", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
+		private var pauseTxtHover_:Text = new Text("[P]ause", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
 		
-		private var muteImg_:Image = new Image(Assets.MUTE_BTN);
-		private var muteHover_:Image = new Image(Assets.MUTE_BTN);
-		private var quitTxt_:Text = new Text("Quit", 0, 0, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:3});
-		private var restartTxt_:Text = new Text("Restart", 0, 0, {size:10, outlineColor:0x000000, 
-			outlineStrength:3});
-		private var quitTxtHover_:Text = new Text("Quit", 0, 0, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:3});
-		private var restartTxtHover_:Text = new Text("Restart", 0, 0, {size:10, outlineColor:0x000000, 
-			outlineStrength:3});
+		private var muteTxt_:Text = new Text("[M]ute", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
+		private var muteTxtHover_:Text = new Text("[M]ute", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
 		
+		private var restartTxt_:Text = new Text("[R]estart", 0, 0, {size:16, outlineColor:0x000000, 
+			outlineStrength:2, font: "Bangers"});
+		private var restartTxtHover_:Text = new Text("[R]estart", 0, 0, {size:16, outlineColor:0x000000, 
+			outlineStrength:2, font: "Bangers"});
 		
 		private var gfx_:Graphiclist;
-	
+		
 		
 		public function HUD()
-		{
-			muteHover_.scale = 1.15
-			muteHover_.updateBuffer();
+		{	
+			Global.pauseBtn = new TextButton(pauseTxt_, 550, 3, 30, 13, pauseGame)
+			Global.pauseBtn.normal = pauseTxt_;
+			Global.pauseBtn.hover = pauseTxtHover_;
+			FP.world.add(Global.pauseBtn);
 			
-			Global.muteBtn = new Button(0, 0, 16, 16, mute);
-			Global.muteBtn.normal = muteImg_;
-			Global.muteBtn.hover = muteHover_;
-			Global.muteBtn.down = muteImg_;
-			FP.world.add(Global.muteBtn);
+			Global.muteBtnTxt = new TextButton(muteTxt_, 670, 3, 30, 13, mute)
+			Global.muteBtnTxt.normal = muteTxt_;
+			Global.muteBtnTxt.hover = muteTxtHover_;
+			FP.world.add(Global.muteBtnTxt);
 			
-			restartTxt_.scale = 0.5;
-			restartTxtHover_.scale = 0.5;
-			Global.restartBtn = new TextButton(restartTxt_, 0, 0, 65, 16, restartLevel);
+			Global.restartBtn = new TextButton(restartTxt_, 700, 3, 65, 16, restartLevel);
 			Global.restartBtn.normal = restartTxt_;
 			Global.restartBtn.hover = restartTxtHover_;
-			Global.restartBtn.changeColor_ = false;
 			FP.world.add(Global.restartBtn);
 			
-			quitTxt_.scale = 0.5;
-			quitTxtHover_.scale = 0.5;
-			Global.quitBtn = new TextButton(quitTxt_, 0, 0, 30, 13, quitGame)
-			Global.quitBtn.normal = quitTxt_;
-			Global.quitBtn.hover = quitTxtHover_;
-			Global.quitBtn.changeColor_ = false;
-			FP.world.add(Global.quitBtn);
+			var curLevel:int = Global.level;
+			levelNum_.text = curLevel.toString();
 			
-			sprite.add("spin", [0, 1], 0.1, true);
+			levelName_.text = "Level Name";
 			
-			sprite.x = 575;
-			sprite.y = 9;
-			
-			coinsTxt_.x = 590;
-			coinsTxt_.y = 5;
-			
-			coinsNum_.x = 605;
-			coinsNum_.y = 6;
-			
-			gfx_ = new Graphiclist(sprite, coinsTxt_, coinsNum_);
+			gfx_ = new Graphiclist(levelTxt_, levelNum_, levelName_);
 			this.graphic = gfx_;
 		}
 		
 		
 		override public function update():void
-		{			
-			sprite.play("spin");
-			coinsNum_.text = String(Global.coinsCollected);
-			coinsNum_.updateTextBuffer();
-			coinsTxt_.updateTextBuffer();
+		{
+			levelNum_.updateTextBuffer();
 		}
 		
 		
@@ -106,28 +91,19 @@ package com.newton.entities
 		 ******************************************************************************************/
 		public function mute():void
 		{
-			if (!Global.paused)
+			if (Global.musicVolume <= 0 || Global.soundVolume <= 0)
 			{
-				if (Global.musicVolume <= 0 || Global.soundVolume <= 0)
-				{
-					Global.musicVolume = Global.DEFAULT_MUSIC_VOLUME;				
-					Global.soundVolume = Global.DEFAULT_SFX_VOLUME;
-					
-					// Log the unmute action to Playtomic
-					Log.LevelCounterMetric("Unmute", Global.level); 
-				}
-				else
-				{
-					Global.musicVolume = 0;
-					Global.soundVolume = 0;
-					
-					// Log the mute action to Playtomic
-					Log.LevelCounterMetric("Mute", Global.level);
-				}
-				
-				Global.menuMusic.volume = Global.musicVolume;
-				Global.gameMusic.volume = Global.musicVolume;
+				Global.musicVolume = Global.DEFAULT_MUSIC_VOLUME;				
+				Global.soundVolume = Global.DEFAULT_SFX_VOLUME;
 			}
+			else
+			{
+				Global.musicVolume = 0;
+				Global.soundVolume = 0;
+			}
+			
+			Global.menuMusic.volume = Global.musicVolume;
+			Global.gameMusic.volume = Global.musicVolume;
 		}
 		
 		
@@ -140,10 +116,28 @@ package com.newton.entities
 		{
 			if (!Global.paused)
 			{
-				// Log the restart level action to Playtomic
-				Log.LevelCounterMetric("RestartLevel", Global.level);
+				var cloneList:Array = [];
+				world.getClass(Player, cloneList);
+				
+				for each (var clone:Player in cloneList)
+				{
+					clone.killMe();
+				}
 				
 				Global.player.killMe();
+			}
+		}
+		
+		
+		private function pauseGame():void
+		{
+			if (Global.paused)
+			{
+				Global.pausedScreen.unpauseGame();
+			}
+			else
+			{
+				Global.pausedScreen.pauseGame();
 			}
 		}
 		
@@ -157,12 +151,7 @@ package com.newton.entities
 		{	
 			if (!Global.paused)
 			{
-				Global.levelObject.flush();
-				Global.sodasObject.flush();
-				Global.statsObject.flush();
-				
-				// Log the Quit action to Playtomic
-				Log.LevelCounterMetric("Quit", Global.level);
+				Global.shared.flush();
 				
 				Global.paused = false;
 				

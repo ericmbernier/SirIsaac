@@ -22,14 +22,11 @@ package com.newton.entities
 	 */
 	public class Player extends Physics
 	{
-		private var BURP:int = 25;
+		private var APPLE_JUMP:int = 25;
 		private var JUMP:int = 8;
-		private var FAN_GUST:uint = 100;
-		private var FAN_MULTIPLIER:uint = 10;
-		private var SPRING_DELAY:uint = 10;
 		
 		// TODO: Format variables and make speeds global variables and not hard-coded values        
-		private var sprite:Spritemap = new Spritemap(Assets.BEAR, 30, 30, null);
+		private var sprite:Spritemap = new Spritemap(Assets.NEWTON, 32, 32, null);
 		
 		// How fast we accelerate
 		private var movement:Number = 1;
@@ -50,10 +47,9 @@ package com.newton.entities
 		private var start:Point;
 		
 		private var rootBeer_:Boolean = false;
-		private var superFizzy_:Boolean = false;
 		
 		private var jumpSnd_:Sfx = new Sfx(Assets.SND_JUMP);
-		private var burpSnd_:Sfx = new Sfx(Assets.SND_BURP);
+		private var burpSnd_:Sfx = new Sfx(Assets.SND_APPLE_JUMP);
 		private var deathSnd_:Sfx = new Sfx(Assets.SND_DEATH);
 		
 		
@@ -69,15 +65,6 @@ package com.newton.entities
 			maxSpeed_ = new Point(4, 8);
 			friction_ = new Point(0.5, 0.5);
 			
-			if (Global.konamiCode)
-			{
-				sprite = new Spritemap(Assets.TURTLE, 30, 30, null);
-			}
-			else if (Global.hatBear)
-			{
-				sprite = new Spritemap(Assets.BEAR_HAT, 30, 30, null);
-			}
-			
 			// Set up animations
 			sprite.add("standLeft", [0, 1], 8, true);
 			sprite.add("standRight", [0, 1], 8, true);
@@ -86,11 +73,6 @@ package com.newton.entities
 			
 			sprite.add("jumpLeft", [0, 1], 0, false);
 			sprite.add("jumpRight", [0, 1], 0, false);
-			
-			sprite.add("slideRight", [0, 1], 0, false);
-			sprite.add("slideLeft", [0, 1], 0, false);
-			
-			sprite.add("fizzy", [2], 0.1, true);
 			
 			sprite.play("standRight");
 			
@@ -102,21 +84,6 @@ package com.newton.entities
 		
 		override public function update():void 
 		{
-			if (Global.levelComplete)
-			{
-				if (direction_) 
-				{ 
-					sprite.play("standRight"); 
-				} 
-				else 
-				{ 
-					sprite.play("standLeft"); 
-				}
-				
-				return;
-			}
-			
-			// Did we die?
 			if (dead) 
 			{ 
 				sprite.alpha -= 0.1; 
@@ -163,8 +130,7 @@ package com.newton.entities
             }
             
             // We should jump
-            if (Input.pressed(Global.keyX) || (Input.pressed(Global.keyUp) && 
-                    Global.upToJump) || Input.pressed(Global.keyW)) 
+            if (Input.pressed(Global.keyX) || Input.pressed(Global.keyUp) || Input.pressed(Global.keyW)) 
             {
                 var jumped:Boolean = false;
                 
@@ -179,34 +145,6 @@ package com.newton.entities
                     world.add(new Particle(x - 5, y + 25 - 5, .5, .5, .1, 0xFFFFFF));
                     
                     jumpSnd_.play(Global.soundVolume, 0);
-                }
-                else if (Global.hatBear)
-                {	
-                    // Wall jump
-                    if (collide(Global.SOLID_TYPE, x - 1, y) && !jumped && walljumping != 3) 
-                    { 
-                        speed_.y = -JUMP;			//jump up
-                        speed_.x = maxSpeed_.x * 2;	//move right fast
-                        walljumping = 2;			//and set wall jump direction
-                        jumped = true;				//so we don't "use up" or double jump
-                        jumpSnd_.play(Global.soundVolume, 0);
-                    }
-                    else if (collide(Global.SOLID_TYPE, x + 1, y) && !jumped && walljumping != 3) 
-                    { 
-                        speed_.y = -JUMP; 
-                        speed_.x = - maxSpeed_.x * 2;
-                        walljumping = 1;
-                        jumped = true;
-                        jumpSnd_.play(Global.soundVolume, 0);
-                    }
-                    else if (rootBeer_)
-                    {
-                        this.burp();
-                    }
-                }
-                else if (rootBeer_)
-                {
-                    this.burp();
                 }
             }
                             
@@ -254,11 +192,6 @@ package com.newton.entities
 					}
 				}
 			}
-			else if (superFizzy_)
-			{
-				sprite.play("fizzy");
-				
-			}
 			else 
 			{
 				if (direction_) 
@@ -300,13 +233,7 @@ package com.newton.entities
 				sprite.flipped = false;
 			}
 			
-			this.collectRootBeer();
-			this.collectCoins();
 			this.collectKey();
-			this.collectSoda();
-			this.checkForSpikes();
-			this.checkForLaserBeams();
-			this.checkForFans();
 		}	
         
 		
@@ -335,8 +262,9 @@ package com.newton.entities
 		}
 
         
-		private function collectRootBeer():void
+		private function collectApple():void
 		{
+			/*
 			var rootbeer:RootBeer = collide(Global.ROOT_BEER_TYPE, x, y) as RootBeer;
 			
 			if (rootbeer)
@@ -344,6 +272,7 @@ package com.newton.entities
 				rootBeer_ = true;
 				rootbeer.collect();
 			}
+			*/
 		}
 
        
@@ -356,18 +285,7 @@ package com.newton.entities
 				key.collect();
 			}
 		}
-		
-	
-        private function collectSoda():void
-		{
-			var soda:Soda = collide(Global.SODA_TYPE, x, y) as Soda;
 			
-			if (soda)
-			{
-				soda.collect();
-			}
-		}		
-
 		
 		public function bounce():void
 		{
@@ -381,18 +299,15 @@ package com.newton.entities
 			world.add(new Particle(x + 5, y + 15, .5, .5, .1, 0xFFFFFF));
 			world.add(new Particle(x - 5, y - 5, .5, .5, .1, 0xFFFFFF));
 			
-			Global.rootBeerVal -= 1;
+			Global.appleVal -= 1;
 			
-			if (Global.rootBeerVal <= 0 )
+			if (Global.appleVal <= 0 )
 			{
-				Global.rootBeerVal = 0;
+				Global.appleVal = 0;
 				rootBeer_ = false;
 			}
 			
-			speed_.y = -BURP;
-			
-			Global.statsObject.data.burps += 1;
-			
+			speed_.y = -APPLE_JUMP;
 			burpSnd_.play(Global.soundVolume);
 		}
 	}

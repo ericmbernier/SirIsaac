@@ -44,40 +44,34 @@ package com.newton.worlds
 	 */
 	public class TitleWorld extends World
 	{ 
-		private const SHAKE_DURATION:Number = 0.3;
-		
 		private var titleLogo_:Image = new Image(Assets.TITLE_LOGO);
 		private var titleBg_:Image = new Image(Assets.TITLE_BG);
-		private var titleCody_:Image = new Image(Assets.TITLE_CODY);
-		private var titleOptionsBg_:Image = new Image(Assets.TITLE_OPTIONS_BG);
-		private var titleCreditsBg_:Image = new Image(Assets.TITLE_CREDITS_BG);
 		
 		private var darkScreen_:Image = Image.createRect(Global.GAME_WIDTH, Global.GAME_HEIGHT, 0x000000, 0);
 		private var creditsBg_:Image = new Image(Assets.TITLE_CREDITS_BG, null);
+		private var isaacNewton_:Image = new Image(Assets.TITLE_ISAAC_NEWTON);
 		
 		// Text on the main menu screen
-		private var playGameTxt_:Text = new Text("Play Game", 0, 20, {size:28, color:0xFFF6A4, font:"Bangers"});
-		private var playGameTxtHover_:Text = new Text("Play Game", 0, 20, {size:28, color:0xA69A35, font:"Bangers"});
-		private var creditsTxt_:Text = new Text("Credits", 0, 20, {size:28, color:0xFFF6A4, font:"Bangers"});
-		private var creditsTxtHover_:Text = new Text("Credits", 0, 20, {size:28, color:0xA69A35, font:"Bangers"});
-		private var backTxt_:Text = new Text("Back", 0, 20, {size:28, color:0x222222, font:"Bangers"});
-		private var backTxtHover_:Text = new Text("Back", 0, 20, {size:28, color:0x666666, font:"Bangers"});
-		private var versionTxt_:Text = new Text("Version 1.0", 645, 462, {size:14, color:0xFFFFFF, font:"Bangers", 
-			outlineColor:0x000000, outlineStrength:0});
+		private var playGameTxt_:Text = new Text("Play Game", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
+		private var playGameTxtHover_:Text = new Text("Play Game", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
+		private var creditsTxt_:Text = new Text("Credits", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
+		private var creditsTxtHover_:Text = new Text("Credits", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
+		private var backTxt_:Text = new Text("Back", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
+		private var backTxtHover_:Text = new Text("Back", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
 		private var gameByTxt_:Text = new Text("A Game by Eric Bernier", 0, 10, {size:18, color:0xFFFFFF, 
-			font:"Bangers", outlineColor:0x000000, outlineStrength:0});
+			font:"Essays", outlineColor:0x000000, outlineStrength:2});
 		
 		// Text graphics on the credits screen
 		private var creditsDesc_:Text = new Text("Programming, and design by", 
-			125, 80, {size:20, visible:false, color:0x000000, font:"Bangers"});
+			125, 80, {size:20, visible:false, color:0x000000, font:"Essays"});
 		private var creditsName_:Text = new Text("Eric Bernier", 
-			125, 105, {size:24, visible:false, color:0x000000, font:"Bangers"});
+			125, 105, {size:24, visible:false, color:0x000000, font:"Essays"});
 		private var creditsSite_:Text = new Text("www.ericbernier.com", 
-			125, 130, {size:20, visible:false, color:0x000000, font:"Bangers"});
+			125, 130, {size:20, visible:false, color:0x000000, font:"Essays"});
 		private var creditsArt_:Text = new Text("Art by PIXELCHUNK", 
-			125, 155, {size:20, visible:false, color:0x000000, font:"Bangers"});
+			125, 155, {size:20, visible:false, color:0x000000, font:"Essays"});
 		private var creditsMusic_:Text = new Text("Music and sound by Daniel Davis", 
-			125, 180, {size:20, visible:false, color:0x000000, font:"Bangers"});
+			125, 180, {size:20, visible:false, color:0x000000, font:"Essays"});
 		
 		// Buttons on the title screen
 		private var playGameBtn_:TextButton;
@@ -86,11 +80,13 @@ package com.newton.worlds
 		
 		// Booleans used to keep track of which screen of the Title World the player is viewing
 		private var viewingTitle_:Boolean = true;
+		private var viewingLevelSelect_:Boolean = false;
+		private var levelSelectEntities_:Array;
 		private var viewingCredits_:Boolean = false;
 		
-		private var buttonHoverSnd_:Sfx = new Sfx(Assets.SND_JUMP);
-		private var buttonSelectSnd_:Sfx = new Sfx(Assets.SND_JUMP);
-		private var buttonBackSnd_:Sfx = new Sfx(Assets.SND_JUMP);
+		private var buttonHoverSnd_:Sfx = new Sfx(Assets.SND_BUTTON_HOVER);
+		private var buttonSelectSnd_:Sfx = new Sfx(Assets.SND_BUTTON_SELECT);
+		private var buttonBackSnd_:Sfx = new Sfx(Assets.SND_BUTTON_BACK);
 		
 		private var muteImg_:Image = new Image(Assets.MUTE_BTN);
 		private var muteHover_:Image = new Image(Assets.MUTE_BTN);
@@ -103,16 +99,16 @@ package com.newton.worlds
 			Global.gameMusic.stop();
 			Global.menuMusic.loop(Global.musicVolume * 0.85);
 			
-			titleLogo_.x = 435;
-			titleLogo_.y = 5;
-			
-			titleCody_.x = 15;
-			titleCody_.y = 15;
+			titleLogo_.x = 55;
+			titleLogo_.y = 25;
 			
 			this.addGraphic(titleBg_);
 			this.addGraphic(titleLogo_);
-			this.addGraphic(titleCody_);
+			this.addGraphic(isaacNewton_);
 			
+			isaacNewton_.x = 225;
+			isaacNewton_.y = 140;
+
 			// Initialize and set all of the text on the main screen
 			playGameTxt_.width = FP.width;
 			playGameTxt_.y -= 28;
@@ -124,22 +120,20 @@ package com.newton.worlds
 			creditsTxtHover_.width = FP.width;
 			creditsTxtHover_.y -=  28;
 			
-			this.addGraphic(versionTxt_);
-			
 			gameByTxt_.centerOO();
 			gameByTxt_.width = FP.width;
 			gameByTxt_.x = FP.halfWidth;
 			this.addGraphic(gameByTxt_);
 			
 			// Initialize all of the buttons on the main menu
-			playGameBtn_ = new TextButton(playGameTxt_, 530, 190, 155, 30, startGame);
+			playGameBtn_ = new TextButton(playGameTxt_, 200, 430, 155, 30, startGame);
 			playGameBtn_.normal = playGameTxt_;
 			playGameBtn_.hover = playGameTxtHover_;
 			playGameBtn_.setRollOverSound(buttonHoverSnd_);
 			playGameBtn_.setSelectSound(buttonSelectSnd_);
 			this.add(playGameBtn_);
 			
-			creditsBtn_ = new TextButton(creditsTxt_, 530, 295, 120, 30, viewCredits);
+			creditsBtn_ = new TextButton(creditsTxt_, 350, 430, 120, 30, viewCredits);
 			creditsBtn_.normal = creditsTxt_;
 			creditsBtn_.hover = creditsTxtHover_;
 			creditsBtn_.setRollOverSound(buttonHoverSnd_);
@@ -150,6 +144,7 @@ package com.newton.worlds
 			
 			creditsBg_.x = 85;
 			creditsBg_.y = Global.GAME_HEIGHT + 15;
+			creditsBg_.scale = 0.75;
 			this.addGraphic(creditsBg_);
 			
 			// Add all of the credits graphics
@@ -199,16 +194,105 @@ package com.newton.worlds
 		private function startGame():void
 		{
 			Playtomic.Log.Play();
+			viewLevelSelect();
 			
-			TweenMax.to(darkScreen_, 0.25, {alpha:1, repeat: 0, yoyo:false, ease:Quad.easeIn, 
-				onComplete:goToLevelSelect});
+			// TweenMax.to(darkScreen_, 0.25, {alpha:1, repeat: 0, yoyo:false, ease:Quad.easeIn, 
+			// 	onComplete:viewLevelSelect});
 		}
 		
 		
-		private function goToLevelSelect():void
+		private function viewLevelSelect():void
 		{
-			FP.world.removeAll();
-			FP.world = new LevelSelectWorld();
+			this.clearMainTitleScreen();
+			viewingLevelSelect_ = true;
+			
+			var levelsToAdd:int =  Global.shared.data.level; //Global.NUM_LEVELS
+			var lockedLevels:int = Global.NUM_LEVELS - levelsToAdd;
+			
+			var xBuffer:int = 30;
+			var yBuffer:int = 215;
+			var bobUp:Boolean = true;
+			levelSelectEntities_ = new Array();
+			
+			// Add all of the level select buttons
+			for (var i:int = 0; i < levelsToAdd; i++)
+			{
+				var levelNum:int = i + 1;
+				var levelTxt:Text = new Text(levelNum.toString());
+				levelTxt.color = 0xDBF58B;
+				levelTxt.size = 28;
+				levelTxt.font = "LuckiestGuy";
+				
+				var levelTxtHover:Text = new Text(levelNum.toString());
+				levelTxtHover.color = 0xBDC837;
+				levelTxt.size = 28;
+				levelTxtHover.font = "LuckiestGuy";
+				
+				var levelBtn:TextButton = new TextButton(levelTxt, xBuffer, yBuffer, 32, 32, null,
+					levelNum);
+				levelBtn.hover = levelTxtHover;
+				
+				levelBtn.setRollOverSound(buttonHoverSnd_);
+				levelBtn.setSelectSound(buttonSelectSnd_);
+				
+				levelSelectEntities_.push(FP.world.add(levelBtn));
+				
+				var diff:int = i % 6;
+				if (diff == 5)
+				{
+					xBuffer = 30;
+					yBuffer += 35;
+				}
+				else
+				{
+					xBuffer += 45;
+				}
+			}
+			
+			for (var j:int = 0; j < lockedLevels; j++)
+			{
+				var question:Text = new Text("?");
+				question.color = 0xDBF58B;
+				question.size = 28;
+				question.font = "LuckiestGuy";
+				
+				var lockedBtn:TextButton = new TextButton(question, xBuffer, yBuffer, 32, 32);
+				lockedBtn.setHitbox(0, 0);
+				levelSelectEntities_.push(FP.world.add(lockedBtn));
+				
+				var levelChecker:int = levelsToAdd + j + 1;
+				
+				var ldiff:int = i % 6;
+				if (ldiff == 5)
+				{
+					xBuffer = 30;
+					yBuffer += 35;
+				}
+				else
+				{
+					xBuffer += 45;
+				}
+				
+				i++;
+			}
+			
+			if (backBtn_ != null)
+			{
+				this.remove(backBtn_);
+			}
+			
+			backTxt_.width = FP.width;
+			backTxt_.y = 0;
+			backTxtHover_.width = FP.width;
+			backTxtHover_.y = 0;
+			
+			backBtn_ = new TextButton(backTxt_, 125, 400, 150, 30, backToTitle);
+			backBtn_.normal = backTxt_;
+			backBtn_.hover = backTxtHover_;
+			backBtn_.setHitbox(120, 30, 0, 0);
+			backBtn_.setRollOverSound(buttonHoverSnd_);
+			backBtn_.setSelectSound(buttonBackSnd_);
+			this.add(backBtn_);
 		}
 		
 		

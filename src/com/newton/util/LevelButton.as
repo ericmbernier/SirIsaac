@@ -66,7 +66,7 @@ package com.newton.util
 		
 		
 		public function LevelButton(levelNum:int, x:Number=0, y:Number=0, width:int=0, height:int=0, 
-				bobUp:Boolean = true)
+									bobUp:Boolean = true)
 		{
 			super(x, y);
 			
@@ -85,8 +85,8 @@ package com.newton.util
 				levelString_ = "?";
 				this.setHitbox(0, 0);
 			}
-						
-			levelTxt_ = new Text(levelString_);
+			
+			levelTxt_ = new Text(levelString_, 0, 0, {outlineColor:0x000000, outlineStrength:2});
 			levelTxt_.size = Global.TEXT_BTN_NORMAL;
 			
 			_normal = levelTxt_;

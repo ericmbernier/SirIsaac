@@ -19,7 +19,7 @@ package com.newton.entities.solids
 			this.x = x;
 			this.y = y;
 			
-			//hide us - we don't need to ever be updated or rendered
+			// Hide us - we don't need to ever be updated or rendered
 			active = false;
 			visible = false;
 		}

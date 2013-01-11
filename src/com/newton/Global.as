@@ -62,8 +62,7 @@ package com.newton
 			
 			
 			appleMeter:AppleMeter,
-			ROOT_BEER_METER:int = 1,
-			rootBeerVal:int = 0,			
+			appleVal:int = 0,			
 			hud:HUD,			
 			
 			player:Player,
@@ -73,8 +72,9 @@ package com.newton
 			bgEntity:Entity,
 			
 			muteBtn:Button,
-			quitBtn:TextButton,
-			restartBtn:TextButton,						
+			muteBtnTxt:TextButton,
+			pauseBtn:TextButton,
+			restartBtn:TextButton,					
 			
 			TV_SCAN:uint = 1,
 			
