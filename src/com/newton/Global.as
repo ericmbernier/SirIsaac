@@ -26,10 +26,11 @@ package com.newton
 		public static var
 			GAME_WIDTH:int = 640,
 			GAME_HEIGHT:int = 480,
-			NUM_LEVELS:uint = 10,
+			NUM_LEVELS:uint = 9,
 			NUM_SODAS:uint = 30,
 			level:int = 0,
 			levelHeight:int = 0,
+			TILE_COLUMNS:int = 5,
 			
 			DIR_UP:uint = 1,
 			DIR_DOWN:uint = 2,
@@ -125,7 +126,7 @@ package com.newton
 
 			SHARED_OBJECT:String = "SIR_ISAAC_EB_SO",
 			shared:SharedObject;
-		
-		public static const grid:int = 32;
+			
+		public static const grid:int = 30;
 	}
 }

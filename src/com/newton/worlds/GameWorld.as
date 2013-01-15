@@ -43,7 +43,7 @@ package com.newton.worlds
 	 */
 	public class GameWorld extends World
 	{		
-		private var tileset:Tilemap;
+		private var outdoorTileset:Tilemap;
 		
 		// Timer so that reset level doesn't happen right away
 		private var reset:int = 30;
@@ -55,11 +55,6 @@ package com.newton.worlds
 		private var sponsorLogoBtn:Button;
 		
 
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
 		override public function begin():void
 		{
 			Log.Play();
@@ -76,11 +71,6 @@ package com.newton.worlds
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
 		override public function update():void 
 		{
 			// Only update if the game is not paused
@@ -145,12 +135,7 @@ package com.newton.worlds
 			}
 		}
 		
-		
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
+	
 		public function loadlevel():void 
 		{	
 			Global.bg = new Background();
@@ -175,23 +160,8 @@ package com.newton.worlds
 			Global.levelHeight = xml.height;
 			
 			//add the tileset to the world
-			add(new Entity(0, 0, tileset = new Tilemap(Assets.TILESET, FP.width, FP.height, 
-					Global.grid, Global.grid)));
-			
-			for each (o in xml.objects[0].levelNum)
-			{
-				var fontSizes:Array = new Array(45, 50, 55, 60, 65);
-				var randomFont:uint = FP.rand(fontSizes.length);
-				
-				levelTxt_ = new Text("Level " + Global.level.toString());
-				levelTxt_.x = o.@x;
-				levelTxt_.y = o.@y;
-				levelTxt_.angle = FP.rand(30);
-				levelTxt_.color = 0x40B0BF;
-				levelTxt_.alpha = 0.5;
-				levelTxt_.size = fontSizes[randomFont];
-				this.addGraphic(levelTxt_);
-			}
+			add(new Entity(0, 0, outdoorTileset = new Tilemap(Assets.TILESET, 
+				FP.width, FP.height, Global.grid, Global.grid)));
 			
 			// Add the door!
 			for each (o in xml.objects[0].door) 
@@ -214,13 +184,14 @@ package com.newton.worlds
 			//it would trail behind the player a bit. Higher the number, slower it follows.
 			add(Global.view = new View(Global.player as Entity, new Rectangle(0,0,FP.width,FP.height), 10));
 			
-			//add tiles
-			for each (o in xml.tilesAbove[0].tile) 
+			for each (o in xml.outdoorTileset[0].tile) 
 			{
-				//place the tiles in the correct position
-				//NOTE that you should replace the "5" with the amount of columns in your tileset!
-				tileset.setTile(o.@x / Global.grid, o.@y / Global.grid, (5 * (o.@ty/Global.grid)) + 
-						(o.@tx/Global.grid));
+				//----------------------------------------------------------------------------------
+				// Place the tiles in the correct position
+				// NOTE that you should replace the TILE_COLUMNS with the amount of columns in your tileset!
+				//----------------------------------------------------------------------------------
+				outdoorTileset.setTile(o.@x / Global.grid, o.@y / Global.grid, 
+					(Global.TILE_COLUMNS * (o.@ty / Global.grid)) + (o.@tx/Global.grid));
 			}
 			
 			//place the solids
@@ -291,11 +262,6 @@ package com.newton.worlds
 		}
 		
 		
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
 		public function nextlevel():void
 		{
 			removeAll();
@@ -316,24 +282,14 @@ package com.newton.worlds
 			loadlevel();
 		}
 		
-		
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
+
 		public function restartlevel():void
 		{
 			removeAll();
 			loadlevel();
 		}
 
-		
-		/*******************************************************************************************
-		 * Method: moreGames
-		 * 
-		 * Description: Callback method that will navigate to sponsor's site
-		 ******************************************************************************************/
+
 		private function moreGames():void
 		{		
 			var url:String = new String("http://www.ericbernier.com");

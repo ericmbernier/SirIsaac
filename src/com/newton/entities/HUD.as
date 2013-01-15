@@ -27,47 +27,48 @@ package com.newton.entities
 	public class HUD extends Entity
 	{	
 		private var levelTxt_:Text = new Text("Level", 10, 3, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:3, font:"Bangers"});
+			outlineColor:0x000000, outlineStrength:3, font:"Essays"});
 		private var levelNum_:Text = new Text("0", 40, 3, {size:16, 
-			outlineColor:0x000000, outlineStrength:3, font:"Bangers"});
+			outlineColor:0x000000, outlineStrength:3, font:"Essays"});
 		private var levelName_:Text = new Text("The Forest", 50, 3, {size:16, 
-			outlineColor:0x000000, outlineStrength:3, font:"Bangers"});
+			outlineColor:0x000000, outlineStrength:3, font:"Essays"});
 		
-		private var pauseTxt_:Text = new Text("[P]ause", 0, 0, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
-		private var pauseTxtHover_:Text = new Text("[P]ause", 0, 0, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
+		private var pauseTxt_:Text = new Text("(P)ause", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Essays"});
+		private var pauseTxtHover_:Text = new Text("(P)ause", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Essays"});
 		
-		private var muteTxt_:Text = new Text("[M]ute", 0, 0, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
-		private var muteTxtHover_:Text = new Text("[M]ute", 0, 0, {size:16, color:0xFFFFFF, 
-			outlineColor:0x000000, outlineStrength:2, font: "Bangers"});
+		private var muteTxt_:Text = new Text("(M)ute", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Essays"});
+		private var muteTxtHover_:Text = new Text("(M)ute", 0, 0, {size:16, color:0xFFFFFF, 
+			outlineColor:0x000000, outlineStrength:2, font: "Essays"});
 		
-		private var restartTxt_:Text = new Text("[R]estart", 0, 0, {size:16, outlineColor:0x000000, 
-			outlineStrength:2, font: "Bangers"});
-		private var restartTxtHover_:Text = new Text("[R]estart", 0, 0, {size:16, outlineColor:0x000000, 
-			outlineStrength:2, font: "Bangers"});
+		private var restartTxt_:Text = new Text("(R)estart", 0, 0, {size:16, outlineColor:0x000000, 
+			outlineStrength:2, font: "Essays"});
+		private var restartTxtHover_:Text = new Text("(R)estart", 0, 0, {size:16, outlineColor:0x000000, 
+			outlineStrength:2, font: "Essays"});
 		
 		private var gfx_:Graphiclist;
 		
 		
 		public function HUD()
 		{	
-			Global.pauseBtn = new TextButton(pauseTxt_, 550, 3, 30, 13, pauseGame)
+			Global.pauseBtn = new TextButton(pauseTxt_, 400, 3, 30, 13, pauseGame)
 			Global.pauseBtn.normal = pauseTxt_;
 			Global.pauseBtn.hover = pauseTxtHover_;
 			FP.world.add(Global.pauseBtn);
 			
-			Global.muteBtnTxt = new TextButton(muteTxt_, 670, 3, 30, 13, mute)
+			Global.muteBtnTxt = new TextButton(muteTxt_, 480, 3, 30, 13, mute)
 			Global.muteBtnTxt.normal = muteTxt_;
 			Global.muteBtnTxt.hover = muteTxtHover_;
 			FP.world.add(Global.muteBtnTxt);
 			
-			Global.restartBtn = new TextButton(restartTxt_, 700, 3, 65, 16, restartLevel);
+			Global.restartBtn = new TextButton(restartTxt_, 530, 3, 65, 16, restartLevel);
 			Global.restartBtn.normal = restartTxt_;
 			Global.restartBtn.hover = restartTxtHover_;
 			FP.world.add(Global.restartBtn);
 			
+			/*
 			var curLevel:int = Global.level;
 			levelNum_.text = curLevel.toString();
 			
@@ -75,20 +76,16 @@ package com.newton.entities
 			
 			gfx_ = new Graphiclist(levelTxt_, levelNum_, levelName_);
 			this.graphic = gfx_;
+			*/
 		}
 		
 		
 		override public function update():void
 		{
-			levelNum_.updateTextBuffer();
+			// levelNum_.updateTextBuffer();
 		}
+
 		
-		
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
 		public function mute():void
 		{
 			if (Global.musicVolume <= 0 || Global.soundVolume <= 0)
@@ -106,12 +103,7 @@ package com.newton.entities
 			Global.gameMusic.volume = Global.musicVolume;
 		}
 		
-		
-		/*******************************************************************************************
-		 * Method:
-		 * 
-		 * Description:
-		 ******************************************************************************************/
+
 		private function restartLevel():void
 		{
 			if (!Global.paused)
@@ -140,26 +132,5 @@ package com.newton.entities
 				Global.pausedScreen.pauseGame();
 			}
 		}
-		
-		
-		/*******************************************************************************************
-		 * Method: quitGame
-		 * 
-		 * Description: Callback method that returns home to the TitleWorld, removing all entities
-		 * ****************************************************************************************/
-		private function quitGame():void
-		{	
-			if (!Global.paused)
-			{
-				Global.shared.flush();
-				
-				Global.paused = false;
-				
-				FP.world.removeAll();
-				
-				//TODO: Polish up transition world to checkerboard pattern
-				FP.world = new TransitionWorld(TitleWorld);
-			}
-		}	
 	}
 }

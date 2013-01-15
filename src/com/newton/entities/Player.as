@@ -66,19 +66,20 @@ package com.newton.entities
 			friction_ = new Point(0.5, 0.5);
 			
 			// Set up animations
-			sprite.add("standLeft", [0, 1], 8, true);
-			sprite.add("standRight", [0, 1], 8, true);
-			sprite.add("walkLeft", [4, 5, 6, 7], 8, true);
-			sprite.add("walkRight", [4, 5, 6, 7], 8, true);
+			sprite.add("standLeft", [0, 12], 1, true);
+			sprite.add("standRight", [0, 12], 1, true);
+			sprite.add("walkLeft", [0, 4, 8, 12, 1], 8, true);
+			sprite.add("walkRight", [0, 4, 8, 12, 1], 8, true);
 			
-			sprite.add("jumpLeft", [0, 1], 0, false);
-			sprite.add("jumpRight", [0, 1], 0, false);
+			sprite.add("jumpLeft", [1], 0, false);
+			sprite.add("jumpRight", [1], 0, false);
 			
 			sprite.play("standRight");
 			
 			// Set hitbox & graphic
 			this.setHitbox(25, 25, 0, -5);
 			graphic = sprite;
+			sprite.scale = 1.5;
 		}
 		
 		

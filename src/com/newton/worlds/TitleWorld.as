@@ -22,18 +22,14 @@ package com.newton.worlds
 	import flash.net.navigateToURL;
 	
 	import net.flashpunk.Entity;
-	import net.flashpunk.FP;
+	import net.flashpunk.FP; 
 	import net.flashpunk.Graphic;
 	import net.flashpunk.Sfx;
-	import net.flashpunk.Tween;
 	import net.flashpunk.World;
 	import net.flashpunk.debug.Console;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Text;
-	import net.flashpunk.tweens.misc.ColorTween;
-	import net.flashpunk.tweens.motion.LinearPath;
-	import net.flashpunk.utils.Ease;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
@@ -63,14 +59,14 @@ package com.newton.worlds
 		
 		// Text graphics on the credits screen
 		private var creditsDesc_:Text = new Text("Programming, and design by", 
-			125, 80, {size:20, visible:false, color:0x000000, font:"Essays"});
+			190, 90, {size:20, visible:false, color:0x000000, font:"Essays"});
 		private var creditsName_:Text = new Text("Eric Bernier", 
-			125, 105, {size:24, visible:false, color:0x000000, font:"Essays"});
+			245, 110, {size:24, visible:false, color:0x000000, font:"Essays"});
 		private var creditsSite_:Text = new Text("www.ericbernier.com", 
-			125, 130, {size:20, visible:false, color:0x000000, font:"Essays"});
-		private var creditsArt_:Text = new Text("Art by PIXELCHUNK", 
-			125, 155, {size:20, visible:false, color:0x000000, font:"Essays"});
-		private var creditsMusic_:Text = new Text("Music and sound by Daniel Davis", 
+			220, 130, {size:20, visible:false, color:0x000000, font:"Essays"});
+		private var creditsArt_:Text = new Text("In-game art provided by opengameart.org.  Title screen clipart is public domain", 
+			175, 155, {size:20, visible:false, color:0x000000, font:"Essays"});
+		private var creditsMusic_:Text = new Text("Royalty Free Classical music provided by royaltyfreemusic.com", 
 			125, 180, {size:20, visible:false, color:0x000000, font:"Essays"});
 		
 		// Buttons on the title screen
@@ -92,7 +88,7 @@ package com.newton.worlds
 		private var muteHover_:Image = new Image(Assets.MUTE_BTN);
 		private var unmuteImg_:Image = new Image(Assets.UNMUTE_BTN);
 		private var unmuteHover_:Image = new Image(Assets.UNMUTE_BTN);
-	
+		
 		
 		public function TitleWorld() 
 		{
@@ -108,7 +104,7 @@ package com.newton.worlds
 			
 			isaacNewton_.x = 225;
 			isaacNewton_.y = 140;
-
+			
 			// Initialize and set all of the text on the main screen
 			playGameTxt_.width = FP.width;
 			playGameTxt_.y -= 28;
@@ -165,6 +161,14 @@ package com.newton.worlds
 			Global.muteBtn.hover = muteHover_;
 			Global.muteBtn.down = muteImg_;
 			this.add(Global.muteBtn);
+			
+			// Get our shared object for the game to determine levels beaten
+			Global.shared = SharedObject.getLocal(Global.SHARED_OBJECT);
+			var levelCheck:int = int(Global.shared.data.level);
+			if (Global.shared.data.level == undefined || levelCheck == 1)
+			{
+				Global.shared.flush();			
+			}
 		}
 		
 		
@@ -195,9 +199,6 @@ package com.newton.worlds
 		{
 			Playtomic.Log.Play();
 			viewLevelSelect();
-			
-			// TweenMax.to(darkScreen_, 0.25, {alpha:1, repeat: 0, yoyo:false, ease:Quad.easeIn, 
-			// 	onComplete:viewLevelSelect});
 		}
 		
 		
@@ -206,11 +207,15 @@ package com.newton.worlds
 			this.clearMainTitleScreen();
 			viewingLevelSelect_ = true;
 			
-			var levelsToAdd:int =  Global.shared.data.level; //Global.NUM_LEVELS
+			playGameBtn_.visible = false;
+			creditsBtn_.visible = false;
+			isaacNewton_.visible = false;
+			
+			var levelsToAdd:int =  Global.NUM_LEVELS // Global.shared.data.level;
 			var lockedLevels:int = Global.NUM_LEVELS - levelsToAdd;
 			
-			var xBuffer:int = 30;
-			var yBuffer:int = 215;
+			var xBuffer:int = 260;
+			var yBuffer:int = 200;
 			var bobUp:Boolean = true;
 			levelSelectEntities_ = new Array();
 			
@@ -218,15 +223,15 @@ package com.newton.worlds
 			for (var i:int = 0; i < levelsToAdd; i++)
 			{
 				var levelNum:int = i + 1;
-				var levelTxt:Text = new Text(levelNum.toString());
-				levelTxt.color = 0xDBF58B;
+				var levelTxt:Text = new Text(levelNum.toString(), 0, 0, {outlineColor:0x000000, outlineStrength:2});
+				levelTxt.color = 0xFFFFFF;
 				levelTxt.size = 28;
-				levelTxt.font = "LuckiestGuy";
+				levelTxt.font = "Essays";
 				
-				var levelTxtHover:Text = new Text(levelNum.toString());
-				levelTxtHover.color = 0xBDC837;
+				var levelTxtHover:Text = new Text(levelNum.toString(), 0, 0, {outlineColor:0x000000, outlineStrength:2});
+				levelTxtHover.color = 0xFFFFFF;
 				levelTxt.size = 28;
-				levelTxtHover.font = "LuckiestGuy";
+				levelTxtHover.font = "Essays";
 				
 				var levelBtn:TextButton = new TextButton(levelTxt, xBuffer, yBuffer, 32, 32, null,
 					levelNum);
@@ -237,11 +242,11 @@ package com.newton.worlds
 				
 				levelSelectEntities_.push(FP.world.add(levelBtn));
 				
-				var diff:int = i % 6;
-				if (diff == 5)
+				var diff:int = i % 3;
+				if (diff == 2)
 				{
-					xBuffer = 30;
-					yBuffer += 35;
+					xBuffer = 260;
+					yBuffer += 45;
 				}
 				else
 				{
@@ -252,7 +257,7 @@ package com.newton.worlds
 			for (var j:int = 0; j < lockedLevels; j++)
 			{
 				var question:Text = new Text("?");
-				question.color = 0xDBF58B;
+				question.color = 0xFFFFFF;
 				question.size = 28;
 				question.font = "LuckiestGuy";
 				
@@ -286,7 +291,7 @@ package com.newton.worlds
 			backTxtHover_.width = FP.width;
 			backTxtHover_.y = 0;
 			
-			backBtn_ = new TextButton(backTxt_, 125, 400, 150, 30, backToTitle);
+			backBtn_ = new TextButton(backTxt_, 295, 415, 150, 30, backToTitle);
 			backBtn_.normal = backTxt_;
 			backBtn_.hover = backTxtHover_;
 			backBtn_.setHitbox(120, 30, 0, 0);
@@ -316,12 +321,17 @@ package com.newton.worlds
 				this.remove(backBtn_);
 			}
 			
+			if (backBtn_ != null)
+			{
+				this.remove(backBtn_);
+			}
+			
 			backTxt_.width = FP.width;
 			backTxt_.y = 0;
 			backTxtHover_.width = FP.width;
 			backTxtHover_.y = 0;
 			
-			backBtn_ = new TextButton(backTxt_, 330, 395, 110, 30, backToTitle);
+			backBtn_ = new TextButton(backTxt_, 260, 400, 110, 30, backToTitle);
 			backBtn_.normal = backTxt_;
 			backBtn_.hover = backTxtHover_;
 			backBtn_.setHitbox(120, 30);
@@ -330,7 +340,7 @@ package com.newton.worlds
 			this.add(backBtn_);
 		}
 		
-			
+		
 		private function clearMainTitleScreen():void
 		{
 			playGameBtn_.visible = false;
@@ -359,14 +369,28 @@ package com.newton.worlds
 				
 				viewingCredits_ = false;
 			}
+			else if (viewingLevelSelect_)
+			{
+				playGameBtn_.visible = true;
+				creditsBtn_.visible = true;
+				isaacNewton_.visible = true;
+				
+				
+				viewingLevelSelect_ = false;
+			}
 			
 			playGameBtn_.visible = true;
 			playGameBtn_.setHitbox(155, 30, 0, 0);
 			
 			creditsBtn_.visible = true;
 			creditsBtn_.setHitbox(120, 30, 0, 0);
+			
+			if (backBtn_ != null)
+			{
+				this.remove(backBtn_);
+			}
 		}
-				
+		
 		
 		public function mute():void
 		{
@@ -410,23 +434,9 @@ package com.newton.worlds
 		}
 		
 		
-		private function moreGames():void
-		{	
-			var url:String = new String("http://www.ericbernier.com");
-			navigateToURL(new URLRequest(url));
-		}
-		
-		
 		private function goToEricsSite():void
 		{	
 			var url:String = new String("http://www.ericbernier.com");
-			navigateToURL(new URLRequest(url));
-		}
-		
-		
-		private function goToFlashPunk():void
-		{	
-			var url:String = new String("http://www.flashpunk.net");
 			navigateToURL(new URLRequest(url));
 		}
 	}

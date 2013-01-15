@@ -37,7 +37,7 @@ package com.newton
 		[Embed(source = '../assets/graphics/slope4.png')] public static const TILESET_SLOPE_4:Class;
 		
 		// HUD
-		[Embed(source = '../assets/graphics/apple.png')] public static const APPLE_METER:Class;		
+		[Embed(source = '../assets/graphics/appleMeter.png')] public static const APPLE_METER:Class;		
 		
 		// Gameworld graphics
 		[Embed(source = '../assets/graphics/mute.png')] public static const MUTE_BTN:Class;
@@ -62,7 +62,7 @@ package com.newton
 		// Intro
 		
 		// Music
-		[Embed(source = '../assets/music/rootBearFloat.mp3')] public static const MUS_MENU:Class;
+		[Embed(source = '../assets/music/MorningMood.mp3')] public static const MUS_MENU:Class;
 		[Embed(source = '../assets/music/watchOutBear.mp3')] public static const MUS_GAME:Class;
 		[Embed(source = '../assets/music/happyBear.mp3')] public static const MUS_ENDING:Class;
 		
