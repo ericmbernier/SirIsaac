@@ -6,7 +6,6 @@ package com.newton.worlds
 	import com.newton.Global;
 	import com.newton.util.Background;
 	import com.newton.util.Button;
-	import com.newton.util.LevelButton;
 	import com.newton.util.TextButton;
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Back;
@@ -379,8 +378,13 @@ package com.newton.worlds
 				playGameBtn_.visible = true;
 				creditsBtn_.visible = true;
 				isaacNewton_.visible = true;
-				levelSelTxt_.visible = true;
+				levelSelTxt_.visible = false;
 				viewingLevelSelect_ = false;
+				
+				for (var i:int = 0; i < levelSelectEntities_.length; i++)
+				{					
+					FP.world.remove(levelSelectEntities_[i]);
+				}
 			}
 			
 			playGameBtn_.visible = true;

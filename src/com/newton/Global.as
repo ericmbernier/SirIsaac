@@ -1,10 +1,10 @@
 package com.newton 
 {
+	import com.newton.entities.AppleMeter;
 	import com.newton.entities.Door;
 	import com.newton.entities.HUD;
 	import com.newton.entities.PausedScreen;
 	import com.newton.entities.Player;
-	import com.newton.entities.AppleMeter;
 	import com.newton.util.Background;
 	import com.newton.util.Button;
 	import com.newton.util.TextButton;
@@ -57,6 +57,7 @@ package com.newton
 			keyD:int = Key.D,
 			keyM:int = Key.M,
 			keyP:int = Key.P,
+			keyQ:int = Key.Q,
 			keyR:int = Key.R,
 			keyX:int = Key.X,
 			keyZ:int = Key.Z,
@@ -102,8 +103,8 @@ package com.newton
 			FADE:uint = 3,
 			
 			// Suggested: Music 55, Sound 85
-			DEFAULT_MUSIC_VOLUME:Number = 0.45,
-			DEFAULT_SFX_VOLUME:Number = 0.4,
+			DEFAULT_MUSIC_VOLUME:Number = 0.40,
+			DEFAULT_SFX_VOLUME:Number = 1.0 ,
 			DEFAULT_VOICE_VOLUME:Number = 1,
 			PAUSED_MUSIC_VOLUME:Number = 0.15,
 			LEVEL_COMPLETE_VOLUME:Number = 0.15,

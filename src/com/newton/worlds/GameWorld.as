@@ -2,6 +2,11 @@ package com.newton.worlds
 {
 	import Playtomic.*;
 	
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Back;
+	import com.greensock.easing.Cubic;
+	import com.greensock.easing.Quad;
+	import com.greensock.plugins.TransformMatrixPlugin;
 	import com.newton.Assets;
 	import com.newton.Global;
 	import com.newton.entities.*;
@@ -11,11 +16,6 @@ package com.newton.worlds
 	import com.newton.util.Button;
 	import com.newton.util.TextButton;
 	import com.newton.util.View;
-	import com.greensock.TweenMax;
-	import com.greensock.easing.Back;
-	import com.greensock.easing.Cubic;
-	import com.greensock.easing.Quad;
-	import com.greensock.plugins.TransformMatrixPlugin;
 	
 	import flash.display.BitmapData;
 	import flash.geom.ColorTransform;
@@ -84,6 +84,13 @@ package com.newton.worlds
 				if (Input.pressed(Global.keyM))
 				{
 					Global.pausedScreen.pausedMute();
+				}
+				
+				if (Input.pressed(Global.keyQ))
+				{
+					var bufferImg:Image = new Image(FP.buffer);
+					FP.world.removeAll();
+					FP.world = new TransitionWorld(TitleWorld, bufferImg, Global.CIRCLE);
 				}
 			}
 			else
@@ -252,7 +259,7 @@ package com.newton.worlds
 		
 		public function nextlevel():void
 		{
-			removeAll();
+			// removeAll();
 			
 			if(Global.level < Assets.LEVELS.length) 
 			{	
@@ -276,8 +283,8 @@ package com.newton.worlds
 			removeAll();
 			loadlevel();
 		}
-
-
+		
+		
 		private function moreGames():void
 		{		
 			var url:String = new String("http://www.ericbernier.com");

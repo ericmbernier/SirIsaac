@@ -25,6 +25,7 @@ package com.newton
 	/**
 	 *
 	 * @author Eric Bernier <http://www.ericbernier.com>
+	 * Based on the preloader by Draknet on the flashpunk.net forums
 	 */
 	public class SirIsaac extends Sprite
 	{

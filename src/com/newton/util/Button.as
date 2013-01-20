@@ -25,6 +25,10 @@ package com.newton.util
 	import net.flashpunk.utils.Input;
 	
 	
+	/**
+	 * 
+	 * Courtesy of rolpege on the flashpunk.net forums
+	 */
 	public class Button extends Entity
 	{
 		public var callback:Function = null;

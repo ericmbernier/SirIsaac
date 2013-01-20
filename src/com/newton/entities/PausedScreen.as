@@ -34,6 +34,8 @@ package com.newton.entities
 			outlineStrength:3, visible:true, font:"Essays"});
 		private var enterTxt_:Text = new Text("Press ENTER to resume", 0, 0, {size:24, 
 			outlineColor:0x000000, outlineStrength:3, visible:true, font:"Essays"});
+		private var quitTxt_:Text = new Text("Press Q to quit", 0, 0, {size:24, 
+			outlineColor:0x000000, outlineStrength:3, visible:true, font:"Essays"});
 		
 		private var gfx_:Graphiclist;
 
@@ -43,27 +45,30 @@ package com.newton.entities
 			super(xCoord, yCoord);
 
 			pTxt_.x = this.x + 230;
-			pTxt_.y = this.y + 190;
+			pTxt_.y = this.y + 135;
 			
 			aTxt_.x = this.x + 257;
-			aTxt_.y = this.y + 190;
+			aTxt_.y = this.y + 135;
 			
 			uTxt_.x = this.x + 290;
-			uTxt_.y = this.y + 190;
+			uTxt_.y = this.y + 135;
 			
 			sTxt_.x = this.x + 325;
-			sTxt_.y = this.y + 190;
+			sTxt_.y = this.y + 135;
 			
 			eTxt_.x = this.x + 350;
-			eTxt_.y = this.y + 190;
+			eTxt_.y = this.y + 135;
 			
 			dTxt_.x = this.x + 380;
-			dTxt_.y = this.y + 190;
+			dTxt_.y = this.y + 135;
 
-			enterTxt_.x = this.x + 210;
-			enterTxt_.y = this.y + 265;
+			enterTxt_.x = this.x + 200;
+			enterTxt_.y = this.y + 210;
 			
-			gfx_ = new Graphiclist(pausedScreen_, pTxt_, aTxt_, uTxt_, sTxt_, eTxt_, dTxt_, enterTxt_);
+			quitTxt_.x = this.x + 250;
+			quitTxt_.y = this.y + 250;
+			
+			gfx_ = new Graphiclist(pausedScreen_, pTxt_, aTxt_, uTxt_, sTxt_, eTxt_, dTxt_, enterTxt_, quitTxt_);
 			this.graphic = gfx_;
 			
 			this.layer = -99999;
