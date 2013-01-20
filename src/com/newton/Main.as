@@ -29,7 +29,6 @@
 		public function Main():void 
 		{
 			super(WIDTH, HEIGHT, FPS, false);
-			
 			// FP.console.enable();
 		}
 		
@@ -44,6 +43,7 @@
 			if (this.checkDomain("ericbernier.com"))
 			{	
 				var screen:Image = new Image(Assets.TITLE_BUFFER);
+				screen.y -= 1;
 				FP.world = new TransitionWorld(TitleWorld, screen, Global.CIRCLE);
 				super.init();
 			}

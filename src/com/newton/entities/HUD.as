@@ -67,22 +67,6 @@ package com.newton.entities
 			Global.restartBtn.normal = restartTxt_;
 			Global.restartBtn.hover = restartTxtHover_;
 			FP.world.add(Global.restartBtn);
-			
-			/*
-			var curLevel:int = Global.level;
-			levelNum_.text = curLevel.toString();
-			
-			levelName_.text = "Level Name";
-			
-			gfx_ = new Graphiclist(levelTxt_, levelNum_, levelName_);
-			this.graphic = gfx_;
-			*/
-		}
-		
-		
-		override public function update():void
-		{
-			// levelNum_.updateTextBuffer();
 		}
 
 		

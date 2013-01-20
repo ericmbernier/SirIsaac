@@ -12,7 +12,7 @@ package com.newton.util
 	{
 		public function Background(type:uint = 0)
 		{	
-			var bg:Class = Assets.TITLE_BG;
+			var bg:Class = Assets.SKY_BG;
 			
 			super(bg, true, true);
 		}

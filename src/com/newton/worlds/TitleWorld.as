@@ -56,6 +56,8 @@ package com.newton.worlds
 		private var backTxtHover_:Text = new Text("Back", 0, 20, {size:28, color:0xFFFFFF, font:"Essays", outlineColor:0x000000, outlineStrength:2});
 		private var gameByTxt_:Text = new Text("A Game by Eric Bernier", 0, 10, {size:18, color:0xFFFFFF, 
 			font:"Essays", outlineColor:0x000000, outlineStrength:2});
+		private var levelSelTxt_:Text = new Text("Select Your Level!", 220, 150, {size:26, color:0xFFFFFF, visible:false,
+			font:"Essays", outlineColor:0x000000, outlineStrength:2});
 		
 		// Text graphics on the credits screen
 		private var creditsDesc_:Text = new Text("Programming, and design by", 
@@ -95,15 +97,15 @@ package com.newton.worlds
 			Global.gameMusic.stop();
 			Global.menuMusic.loop(Global.musicVolume * 0.85);
 			
-			titleLogo_.x = 55;
-			titleLogo_.y = 25;
+			titleLogo_.x = 140;
+			titleLogo_.y = 40;
 			
 			this.addGraphic(titleBg_);
 			this.addGraphic(titleLogo_);
 			this.addGraphic(isaacNewton_);
 			
 			isaacNewton_.x = 225;
-			isaacNewton_.y = 140;
+			isaacNewton_.y = 110;
 			
 			// Initialize and set all of the text on the main screen
 			playGameTxt_.width = FP.width;
@@ -122,14 +124,14 @@ package com.newton.worlds
 			this.addGraphic(gameByTxt_);
 			
 			// Initialize all of the buttons on the main menu
-			playGameBtn_ = new TextButton(playGameTxt_, 200, 430, 155, 30, startGame);
+			playGameBtn_ = new TextButton(playGameTxt_, 200, 430, 130, 30, startGame);
 			playGameBtn_.normal = playGameTxt_;
 			playGameBtn_.hover = playGameTxtHover_;
 			playGameBtn_.setRollOverSound(buttonHoverSnd_);
 			playGameBtn_.setSelectSound(buttonSelectSnd_);
 			this.add(playGameBtn_);
 			
-			creditsBtn_ = new TextButton(creditsTxt_, 350, 430, 120, 30, viewCredits);
+			creditsBtn_ = new TextButton(creditsTxt_, 350, 430, 90, 30, viewCredits);
 			creditsBtn_.normal = creditsTxt_;
 			creditsBtn_.hover = creditsTxtHover_;
 			creditsBtn_.setRollOverSound(buttonHoverSnd_);
@@ -137,6 +139,7 @@ package com.newton.worlds
 			this.add(creditsBtn_);
 			
 			this.addGraphic(darkScreen_);
+			this.addGraphic(levelSelTxt_);
 			
 			creditsBg_.x = 85;
 			creditsBg_.y = Global.GAME_HEIGHT + 15;
@@ -206,6 +209,8 @@ package com.newton.worlds
 		{
 			this.clearMainTitleScreen();
 			viewingLevelSelect_ = true;
+			
+			levelSelTxt_.visible = true;
 			
 			playGameBtn_.visible = false;
 			creditsBtn_.visible = false;
@@ -374,8 +379,7 @@ package com.newton.worlds
 				playGameBtn_.visible = true;
 				creditsBtn_.visible = true;
 				isaacNewton_.visible = true;
-				
-				
+				levelSelTxt_.visible = true;
 				viewingLevelSelect_ = false;
 			}
 			

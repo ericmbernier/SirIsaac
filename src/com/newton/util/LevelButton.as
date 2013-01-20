@@ -27,6 +27,7 @@ package com.newton.util
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
+	import net.flashpunk.graphics.Image;
 	import net.flashpunk.Mask;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.graphics.Graphiclist;
@@ -190,8 +191,7 @@ package com.newton.util
 					//------------------------------------------------------------------------------
 					Global.level = levelNum_ - 1;
 					FP.world.removeAll();
-					FP.world = new TransitionWorld(GameWorld);
-				}
+					FP.world = new TransitionWorld(GameWorld, new Image(FP.buffer), Global.FLIP_SCREEN};
 			}
 		}
 		

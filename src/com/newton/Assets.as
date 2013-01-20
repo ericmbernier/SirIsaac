@@ -42,6 +42,7 @@ package com.newton
 		// Gameworld graphics
 		[Embed(source = '../assets/graphics/mute.png')] public static const MUTE_BTN:Class;
 		[Embed(source = '../assets/graphics/unmute.png')] public static const UNMUTE_BTN:Class;
+		[Embed(source = '../assets/graphics/sky.png')] public static const SKY_BG:Class;
 		
 		// Platforms and Objects
 		[Embed(source = '../assets/graphics/crate.png')] public static const OBJECT_CRATE:Class;	
@@ -57,16 +58,20 @@ package com.newton
 		// Player
 		[Embed(source = '../assets/graphics/newtonSprite.png')] public static const NEWTON:Class;
 		
+		// Effects
+		[Embed(source = '../assets/graphics/newtonBlur.png')] public static const EFFECTS_DASH_BLUR:Class;
+		
 		// Enemies
 		
 		// Intro
 		
 		// Music
 		[Embed(source = '../assets/music/MorningMood.mp3')] public static const MUS_MENU:Class;
-		[Embed(source = '../assets/music/watchOutBear.mp3')] public static const MUS_GAME:Class;
+		[Embed(source = '../assets/music/swanLake.mp3')] public static const MUS_GAME:Class;
 		[Embed(source = '../assets/music/happyBear.mp3')] public static const MUS_ENDING:Class;
 		
 		// Sound
+		[Embed(source = '../assets/sound/appleBite.mp3')] public static const SND_APPLE:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_APPLE_JUMP:Class;
 		[Embed(source = '../assets/sound/buttonSelect.mp3')] public static const SND_BUTTON_BACK:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_BUTTON_HOVER:Class;

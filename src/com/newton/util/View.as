@@ -59,12 +59,9 @@ package com.newton.util
 			
 			Global.hud.x = FP.camera.x;
 			Global.hud.y = FP.camera.y;
-			Global.pauseBtn.x = FP.camera.x + 530;
-			Global.pauseBtn.y = FP.camera.y + 3;
-			Global.muteBtnTxt.x = FP.camera.x + 590;
-			Global.muteBtnTxt.y = FP.camera.y + 3;
-			Global.restartBtn.x = FP.camera.x + 645;
-			Global.restartBtn.y = FP.camera.y + 3;
+			Global.pauseBtn.x = FP.camera.x + 450;
+			Global.muteBtnTxt.x = FP.camera.x + 510;
+			Global.restartBtn.x = FP.camera.x + 565;
 			
 			Global.pausedScreen.x = FP.camera.x;
 			Global.pausedScreen.y = FP.camera.y;
@@ -77,22 +74,16 @@ package com.newton.util
 					FP.camera.x = within_.x; 
 					
 					Global.hud.x = within_.x;
-					Global.pauseBtn.x = within_.x + 530;
-					Global.muteBtnTxt.x = within_.x + 590;
-					Global.restartBtn.x = within_.x + 645;
-					
+					Global.pauseBtn.x = within_.x + 450;
+					Global.muteBtnTxt.x = within_.x + 510;
+					Global.restartBtn.x = within_.x + 565;
 					Global.pausedScreen.x = within_.x;
 				}
 				
 				if (FP.camera.y < within_.y) 
 				{ 
 					FP.camera.y = within_.y; 
-					
 					Global.hud.y = within_.y;
-					Global.muteBtnTxt.y = within_.y + 3;
-					Global.pauseBtn.y = within_.y + 3;
-					Global.restartBtn.y = within_.y + 3;
-					
 					Global.pausedScreen.y = within_.y;
 				}
 				
@@ -101,30 +92,24 @@ package com.newton.util
 					FP.camera.x = within_.x + within_.width - FP.screen.width;
 					
 					Global.hud.x = within_.x + within_.width - FP.screen.width;
-					Global.pauseBtn.x = within_.x + within_.width - FP.screen.width + 530;
-					Global.muteBtnTxt.x = within_.x + within_.width - FP.screen.width + 590;
-					Global.restartBtn.x = within_.x + within_.width - FP.screen.width + 645;
-					
+					Global.pauseBtn.x = within_.x + within_.width - FP.screen.width + 450;
+					Global.muteBtnTxt.x = within_.x + within_.width - FP.screen.width + 510;
+					Global.restartBtn.x = within_.x + within_.width - FP.screen.width + 565;	
 					Global.pausedScreen.x = within_.x + within_.width - FP.screen.width;
 				}
 				
 				if (FP.camera.y + FP.screen.height > within_.y + within_.height) 
 				{ 
 					FP.camera.y = within_.y + within_.height - FP.screen.height; 
-					
 					Global.hud.y = within_.y + within_.height - FP.screen.height;
-					Global.pauseBtn.y = within_.y + within_.height - FP.screen.height + 3;
-					Global.muteBtnTxt.y = within_.y + within_.height - FP.screen.height + 3;					
-					Global.restartBtn.y = within_.y + within_.height - FP.screen.height + 3;
-					
 					Global.pausedScreen.y = within_.y + within_.height - FP.screen.height;
 				}
 				
-				Global.pauseBtn.setHitbox(45, 17, Global.pauseBtn.x - 530, 
+				Global.pauseBtn.setHitbox(45, 17, Global.pauseBtn.x - 450, 
 					Global.pauseBtn.y - 3);
-				Global.muteBtnTxt.setHitbox(40, 17, Global.muteBtnTxt.x - 590,
+				Global.muteBtnTxt.setHitbox(40, 17, Global.muteBtnTxt.x - 510,
 					Global.muteBtnTxt.y - 3);
-				Global.restartBtn.setHitbox(65, 17, Global.restartBtn.x - 645, 
+				Global.restartBtn.setHitbox(65, 17, Global.restartBtn.x - 565, 
 					Global.restartBtn.y - 3);
 			}
 		}

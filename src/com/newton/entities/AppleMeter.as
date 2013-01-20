@@ -29,21 +29,22 @@ package com.newton.entities
 		
 		private var text:Text = new Text("Apples", 0, 0, {size:18, 
 			outlineColor:0x000000, outlineStrength:3, font:"Essays"});
-		private static const sprite:Spritemap = new Spritemap(Assets.APPLE_METER, 80, 20, null);		
+		private var sprite:Spritemap;	
 		private var meterValue_:int = 0;		
 		private var gfxList_:Graphiclist;
 		
 		
 		public function AppleMeter()
-		{
-			this.x = 10;
-			this.y = 5;	
-			
+		{			
+			sprite = new Spritemap(Assets.APPLE_METER, 80, 20, null);
 			sprite.add("empty", [0], 1, false);
 			sprite.add("oneApple", [1], 1, false);
 			sprite.add("twoApples", [2], 1, false);
 			sprite.add("threeApples", [3], 1, false);
 			sprite.add("fourApples", [4], 1, false);
+			
+			sprite.x += 60;
+			sprite.y +=3;
 			
 			gfxList_ = new Graphiclist(text, sprite);
 			gfxList_.x = 10;

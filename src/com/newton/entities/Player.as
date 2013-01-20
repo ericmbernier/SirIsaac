@@ -4,6 +4,7 @@ package com.newton.entities
 	
 	import com.newton.Assets;
 	import com.newton.Global;
+	import com.newton.effects.Blur;
 	
 	import flash.geom.Point;
 	
@@ -21,35 +22,24 @@ package com.newton.entities
 	 * @author Eric Bernier
 	 */
 	public class Player extends Physics
-	{
-		private var APPLE_JUMP:int = 25;
-		private var JUMP:int = 8;
+	{	
+		private const WIDTH:int = 32;
+		private const HEIGHT:int = 32;
+		private const APPLE_JUMP:int = 25;
+		private const JUMP:int = 8;
 		
-		// TODO: Format variables and make speeds global variables and not hard-coded values        
-		private var sprite:Spritemap = new Spritemap(Assets.NEWTON, 32, 32, null);
-		
-		// How fast we accelerate
+		private var sprite:Spritemap = new Spritemap(Assets.NEWTON, WIDTH, HEIGHT, null);
 		private var movement:Number = 1;
 		
 		// Current player direction (true = right, false = left)
 		private var direction_:Boolean = true;
-		
-		// Are we on the ground?
-		public var onGround_:Boolean = false;		
 	
-		// Are we walljumping? (0 = no, 1 = left, 2 = right)
-		private var walljumping:int = 0;
-		
-		// Are we double jumping
-		public var doubleJump_:Boolean = false;
-		
+		public var onGround_:Boolean = false;		
 		private var dead:Boolean = false;
 		private var start:Point;
-		
-		private var rootBeer_:Boolean = false;
-		
+		private var apples_:Boolean = false;
 		private var jumpSnd_:Sfx = new Sfx(Assets.SND_JUMP);
-		private var burpSnd_:Sfx = new Sfx(Assets.SND_APPLE_JUMP);
+		private var appleSnd_:Sfx = new Sfx(Assets.SND_APPLE_JUMP);
 		private var deathSnd_:Sfx = new Sfx(Assets.SND_DEATH);
 		
 		
@@ -79,7 +69,6 @@ package com.newton.entities
 			// Set hitbox & graphic
 			this.setHitbox(25, 25, 0, -5);
 			graphic = sprite;
-			sprite.scale = 1.5;
 		}
 		
 		
@@ -100,8 +89,6 @@ package com.newton.entities
             if (collide(Global.SOLID_TYPE, x, y + 1) || Global.onMovingPlatform) 
             { 
                 onGround_ = true;
-                doubleJump_ = true;
-                walljumping = 0;
             }
             
             // Set acceleration to nothing
@@ -147,6 +134,10 @@ package com.newton.entities
                     
                     jumpSnd_.play(Global.soundVolume, 0);
                 }
+				else if (apples_)
+				{
+					this.appleJump();
+				}
             }
                             
             gravity();
@@ -234,6 +225,7 @@ package com.newton.entities
 				sprite.flipped = false;
 			}
 			
+			this.collectApples();
 			this.collectKey();
 		}	
         
@@ -242,7 +234,13 @@ package com.newton.entities
 		{
 			dead = true;
 			
-			world.add(new Explode(x, y, .5, .5, .1));
+			world.add(new Particle(x, y + 30, .5, .5, .1, 0x8D2828));
+			world.add(new Particle(x + 5, y + 28 + 5, .5, .5, .1, 0x8D2828));
+			world.add(new Particle(x + 10, y + 25 - 5, .5, .5, .1, 0x8D2828));
+			world.add(new Particle(x, y + 20, .5, .5, .1, 0x8D2828));
+			world.add(new Particle(x + 33, y + 21 + 5, .5, .5, .1, 0x8D2828));
+			world.add(new Particle(x + 20, y + 22 - 5, .5, .5, .1, 0x8D2828));
+			
 			this.setHitbox(0, 0);
 			FP.world.remove(this);
 			
@@ -263,17 +261,15 @@ package com.newton.entities
 		}
 
         
-		private function collectApple():void
+		private function collectApples():void
 		{
-			/*
-			var rootbeer:RootBeer = collide(Global.ROOT_BEER_TYPE, x, y) as RootBeer;
+			var apple:Apple = collide(Global.APPLE_TYPE, x, y) as Apple;
 			
-			if (rootbeer)
+			if (apple)
 			{
-				rootBeer_ = true;
-				rootbeer.collect();
+				apples_ = true;
+				apple.collect();
 			}
-			*/
 		}
 
        
@@ -295,21 +291,23 @@ package com.newton.entities
 		
 	
 		public function appleJump():void
-		{
+		{	
 			world.add(new Particle(x, y + 10, .5, .5, .1, 0xFFFFFF));
 			world.add(new Particle(x + 5, y + 15, .5, .5, .1, 0xFFFFFF));
 			world.add(new Particle(x - 5, y - 5, .5, .5, .1, 0xFFFFFF));
+		
+			world.add(new Blur(x, y + HEIGHT, direction_));
 			
 			Global.appleVal -= 1;
 			
 			if (Global.appleVal <= 0 )
 			{
 				Global.appleVal = 0;
-				rootBeer_ = false;
+				apples_ = false;
 			}
 			
 			speed_.y = -APPLE_JUMP;
-			burpSnd_.play(Global.soundVolume);
+			appleSnd_.play(Global.soundVolume);
 		}
 	}
 }

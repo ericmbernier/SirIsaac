@@ -47,7 +47,7 @@ package com.newton.entities
 				color:uint = WHITE, radius:uint = RADIUS, fanParticle:Boolean = false,
 				fanDir:int = -1) 
 		{
-			image = Image.createRect(10, 10, color, 1);
+			image = Image.createCircle(6, color, 1);
 			image.alpha = 0.8
 			
 			scale = s;

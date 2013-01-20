@@ -109,8 +109,8 @@ package com.newton
 			this.addChild(bgImg_);
 			
 			this.addChild(logo_);
-			logo_.x = 60;
-			logo_.y = 90;
+			logo_.x = 160;
+			logo_.y = 125;
 			TweenMax.from(logo_, 0.85, {y: -200, ease:Bounce.easeOut, delay:0, onComplete:null});		
 
 			this.addChild(oneGameLogo_);
@@ -166,9 +166,9 @@ package com.newton
 						progressBar.x = 800;
 						TweenMax.from(progressBar, 0.75, {x:175, ease:null, delay:0, onComplete:null});
 						
-						playBtn_.x = 252;
-						playBtn_.y = 220;
-						TweenMax.from(playBtn_, 0.75, {x: -200, ease:Back.easeOut, delay:0, onComplete:null});
+						playBtn_.x = 265;
+						playBtn_.y = 185;
+						TweenMax.from(playBtn_, 0.75, {x: -215, ease:Back.easeOut, delay:0, onComplete:null});
 						
 						playBtnClip_.addChild(playBtn_);
 						playBtnClip_.addEventListener(MouseEvent.CLICK, onMouseDown);

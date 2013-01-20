@@ -4,7 +4,6 @@ package com.newton.entities
 	import com.greensock.easing.Quad;
 	import com.newton.Assets;
 	import com.newton.Global;
-	import com.newton.entities.BannerMessage;
 	
 	import flash.display.BitmapData;
 	
@@ -45,14 +44,15 @@ package com.newton.entities
 		{	
 			super.update();	
 		}
+		
 
 		public function collect():void
 		{	
             Global.appleVal += 1;
             
-            world.add(new Particle(x, y, .5, .5, .1, 0x8B4513));
-            world.add(new Particle(x + 5, y + 5, .5, .5, .1, 0x8B4513));
-            world.add(new Particle(x - 5, y - 5, .5, .5, .1, 0x8B4513));
+            world.add(new Particle(x, y, .5, .5, .1, 0xF3232D));
+            world.add(new Particle(x + 5, y + 5, .5, .5, .1, 0xF3232D));
+            world.add(new Particle(x - 5, y - 5, .5, .5, .1, 0xF3232D));
 			
 			appleSnd_.play(Global.soundVolume);
 			FP.world.remove(this);

@@ -102,7 +102,7 @@ package com.newton
 			FADE:uint = 3,
 			
 			// Suggested: Music 55, Sound 85
-			DEFAULT_MUSIC_VOLUME:Number = 0.80,
+			DEFAULT_MUSIC_VOLUME:Number = 0.45,
 			DEFAULT_SFX_VOLUME:Number = 0.4,
 			DEFAULT_VOICE_VOLUME:Number = 1,
 			PAUSED_MUSIC_VOLUME:Number = 0.15,

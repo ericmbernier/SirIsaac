@@ -21,19 +21,19 @@ package com.newton.entities
 		private var pausedScreen_:Image = Image.createRect(Global.GAME_WIDTH, Global.GAME_HEIGHT, 
 			0x000000, 0);
 		private var pTxt_:Text = new Text("P ", 0, 0, {size:40, outlineColor:0x000000, 
-			outlineStrength:3, visible:true});
+			outlineStrength:3, visible:true, font:"Essays"});
 		private var aTxt_:Text = new Text("A ", 0, 0, {size:40, outlineColor:0x000000, 
-			outlineStrength:3, visible:true});
+			outlineStrength:3, visible:true, font:"Essays"});
 		private var uTxt_:Text = new Text("U ", 0, 0, {size:40, outlineColor:0x000000, 
-			outlineStrength:3, visible:true});
+			outlineStrength:3, visible:true, font:"Essays"});
 		private var sTxt_:Text = new Text("S ", 0, 0, {size:40, outlineColor:0x000000, 
-			outlineStrength:3, visible:true});
+			outlineStrength:3, visible:true, font:"Essays"});
 		private var eTxt_:Text = new Text("E ", 0, 0, {size:40, outlineColor:0x000000, 
-			outlineStrength:3, visible:true});
+			outlineStrength:3, visible:true, font:"Essays"});
 		private var dTxt_:Text = new Text("D ", 0, 0, {size:40, outlineColor:0x000000, 
-			outlineStrength:3, visible:true});
+			outlineStrength:3, visible:true, font:"Essays"});
 		private var enterTxt_:Text = new Text("Press ENTER to resume", 0, 0, {size:24, 
-			outlineColor:0x000000, outlineStrength:3, visible:true});
+			outlineColor:0x000000, outlineStrength:3, visible:true, font:"Essays"});
 		
 		private var gfx_:Graphiclist;
 
@@ -45,13 +45,13 @@ package com.newton.entities
 			pTxt_.x = this.x + 230;
 			pTxt_.y = this.y + 190;
 			
-			aTxt_.x = this.x + 260;
+			aTxt_.x = this.x + 257;
 			aTxt_.y = this.y + 190;
 			
 			uTxt_.x = this.x + 290;
 			uTxt_.y = this.y + 190;
 			
-			sTxt_.x = this.x + 320;
+			sTxt_.x = this.x + 325;
 			sTxt_.y = this.y + 190;
 			
 			eTxt_.x = this.x + 350;
@@ -60,7 +60,7 @@ package com.newton.entities
 			dTxt_.x = this.x + 380;
 			dTxt_.y = this.y + 190;
 
-			enterTxt_.x = this.x + 175;
+			enterTxt_.x = this.x + 210;
 			enterTxt_.y = this.y + 265;
 			
 			gfx_ = new Graphiclist(pausedScreen_, pTxt_, aTxt_, uTxt_, sTxt_, eTxt_, dTxt_, enterTxt_);

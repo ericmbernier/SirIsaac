@@ -43,7 +43,7 @@ package com.newton.worlds
 	 */
 	public class GameWorld extends World
 	{		
-		private var outdoorTileset:Tilemap;
+		private var tileset:Tilemap;
 		
 		// Timer so that reset level doesn't happen right away
 		private var reset:int = 30;
@@ -80,8 +80,7 @@ package com.newton.worlds
 				{
 					Global.pausedScreen.unpauseGame();
 				}
-				
-				// Allow the player to mute the game from the paused screen
+
 				if (Input.pressed(Global.keyM))
 				{
 					Global.pausedScreen.pausedMute();
@@ -107,20 +106,13 @@ package com.newton.worlds
 				super.update();				
 			}
 			
-			// If we should restart
 			if (Global.restart) 
 			{ 	
-				// Make a timer so it isn't instant
 				reset -= 1;
 				if (reset == 0) 
 				{
-					// Restart level
 					restartlevel();
-					
-					//Set restart to false
 					Global.restart = false;
-					
-					//Reset our timer
 					reset = 30;
 				}
 			}
@@ -128,7 +120,7 @@ package com.newton.worlds
 			Global.bg.x -= 0.25;
 			Global.bg.y -= 0.25;
 			
-			// load next level on level completion
+			// Load next level upon previous level completion
 			if (Global.finished) 
 			{
 				nextlevel();
@@ -160,28 +152,26 @@ package com.newton.worlds
 			Global.levelHeight = xml.height;
 			
 			//add the tileset to the world
-			add(new Entity(0, 0, outdoorTileset = new Tilemap(Assets.TILESET, 
-				FP.width, FP.height, Global.grid, Global.grid)));
+			add(new Entity(0, 0, tileset = new Tilemap(Assets.TILESET, FP.width, FP.height, 
+				Global.grid, Global.grid)));
 			
-			// Add the door!
-			for each (o in xml.objects[0].door) 
+			for each (o in xml.entities[0].door) 
 			{ 
 				Global.door = new Door(o.@x, o.@y, false);
 				this.add(Global.door);
 			}
 			
-			for each (o in xml.objects[0].doorLock) 
+			for each (o in xml.entities[0].doorLock) 
 			{ 
 				Global.door = new Door(o.@x, o.@y, true);
 				this.add(Global.door);
 			}
 			
-			// Add the view, and the player
-			add(Global.player = new Player(xml.objects[0].player.@x, xml.objects[0].player.@y));
+			add(Global.player = new Player(xml.entities[0].player.@x, xml.entities[0].player.@y));
 			
-			//set the view to follow the player, within no restraints, and let it "stray" from the player a bit.
-			//for example, if the last parameter was 1, the view would be static with the player. If it was 10, then
-			//it would trail behind the player a bit. Higher the number, slower it follows.
+			// Set the view to follow the player, within no restraints, and let it "stray" from the player a bit.
+			// for example, if the last parameter was 1, the view would be static with the player. If it was 10, then
+			// it would trail behind the player a bit. Higher the number, slower it follows.
 			add(Global.view = new View(Global.player as Entity, new Rectangle(0,0,FP.width,FP.height), 10));
 			
 			for each (o in xml.outdoorTileset[0].tile) 
@@ -190,54 +180,52 @@ package com.newton.worlds
 				// Place the tiles in the correct position
 				// NOTE that you should replace the TILE_COLUMNS with the amount of columns in your tileset!
 				//----------------------------------------------------------------------------------
-				outdoorTileset.setTile(o.@x / Global.grid, o.@y / Global.grid, 
-					(Global.TILE_COLUMNS * (o.@ty / Global.grid)) + (o.@tx/Global.grid));
+				tileset.setTile(o.@x / Global.grid, o.@y / Global.grid, 
+						(Global.TILE_COLUMNS * (o.@ty / Global.grid)) + (o.@tx/Global.grid));
 			}
 			
-			//place the solids
 			for each (o in xml.floors[0].rect) 
 			{
-				//place flat solids, setting their position & width/height
 				add(new Solid(o.@x, o.@y, o.@w, o.@h));
 			}
 			
-			for each (o in xml.objects[0].platformNormal)
+			for each (o in xml.entities[0].platformNormal)
 			{
 				add(new Platform(o.@x, o.@y));
 			}
 			
-			//place a crate
-			for each (o in xml.objects[0].crate) 
+			for each (o in xml.entities[0].crate) 
 			{ 
 				add(new Crate(o.@x, o.@y)); 
 			}
 			
-			//place a moving platform
-			for each (o in xml.objects[0].platformHorizontal) 
+			for each (o in xml.entities[0].platformHorizontal) 
 			{ 
 				add(new PlatformHorizontal(o.@x, o.@y)); 
 			}
 			
-			//place a moving platform
-			for each (o in xml.objects[0].platformVertical) 
+			for each (o in xml.entities[0].platformVertical) 
 			{ 
 				add(new PlatformVertical(o.@x, o.@y)); 
 			}
 			
-			// Add all of the keys
-			for each (o in xml.objects[0].key) 
+			for each (o in xml.entities[0].key) 
 			{
 				add(new DoorKey(o.@x, o.@y));
 			}
 			
+			for each (o in xml.entities[0].apple) 
+			{
+				add(new Apple(o.@x, o.@y));
+			}
+			
 			directionsArray_ = new Array();
-			for each (o in xml.objects[0].directions)
+			for each (o in xml.entities[0].directions)
 			{	
 				directionsArray_.push(this.addGraphic(new Text(o.@text, o.@x, o.@y, 
 					{size:20, color:0xFFFFFF})));
 			}
 			
-			// Add the temporary sponsor logo here
 			if (Global.level == 1)
 			{				
 				var sponsorLogo:Image = new Image(Assets.EB_LOGO);
