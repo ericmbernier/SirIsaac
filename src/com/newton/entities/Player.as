@@ -40,7 +40,7 @@ package com.newton.entities
 		private var apples_:Boolean = false;
 		private var jumpSnd_:Sfx = new Sfx(Assets.SND_JUMP);
 		private var appleSnd_:Sfx = new Sfx(Assets.SND_APPLE_JUMP);
-		private var deathSnd_:Sfx = new Sfx(Assets.SND_DEATH);
+		private var deathSnd_:Sfx = new Sfx(Assets.SND_BUTTON_SELECT);
 		
 		
 		public function Player(x:int, y:int) 
@@ -244,7 +244,8 @@ package com.newton.entities
 			this.setHitbox(0, 0);
 			FP.world.remove(this);
 			
-			deathSnd_.play(Global.soundVolume);		
+			deathSnd_.play(Global.soundVolume);
+			Global.appleVal = 0;
 			Global.restart = true;
 		}
 		

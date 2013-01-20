@@ -159,9 +159,20 @@ package com.newton.worlds
 			unmuteHover_.updateBuffer();
 			
 			Global.muteBtn = new Button(4, 0, 26, 26, mute);
-			Global.muteBtn.normal = muteImg_;
-			Global.muteBtn.hover = muteHover_;
-			Global.muteBtn.down = muteImg_;
+			
+			if (Global.soundVolume > 0)
+			{
+				Global.muteBtn.normal = muteImg_;
+				Global.muteBtn.hover = muteHover_;
+				Global.muteBtn.down = muteImg_;				
+			}
+			else
+			{
+				Global.muteBtn.normal = unmuteImg_;
+				Global.muteBtn.hover = unmuteHover_;
+				Global.muteBtn.down = unmuteImg_;
+			}
+
 			this.add(Global.muteBtn);
 			
 			// Get our shared object for the game to determine levels beaten

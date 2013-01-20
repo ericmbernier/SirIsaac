@@ -44,13 +44,9 @@ package com.newton.worlds
 	public class GameWorld extends World
 	{		
 		private var tileset:Tilemap;
-		
-		// Timer so that reset level doesn't happen right away
 		private var reset:int = 30;
-		
 		private var levelTxt_:Text;
 		private var directionsArray_:Array;
-		
 		private var addLevelComplete_:Boolean = true;
 		private var sponsorLogoBtn:Button;
 		
@@ -141,24 +137,27 @@ package com.newton.worlds
 			Global.bgEntity = new Entity(0, 0, Global.bg);
 			this.add(Global.bgEntity);
 			
-			// Get the XML
+			Global.tvBg = new Background(Global.TV_SCAN);
+			Global.tvBg.alpha = 0.05;
+			Global.tvBgEntity = new Entity(0, 0, Global.tvBg);
+			Global.tvBgEntity.layer = -99999
+			this.add(Global.tvBgEntity);
+
 			var file:ByteArray = new Assets.LEVELS[Global.level - 1];
 			var str:String = file.readUTFBytes( file.length );
 			var xml:XML = new XML(str);
-			
-			//define some variables that we will use later on
+
 			var e:Entity;
 			var o:XML;
 			var n:XML;
 			
-			//set the level size
+			// Set the level size
 			FP.width = xml.width;
 			FP.height = xml.height;
 			
 			// Get the height of the level, used to determine if the player fell to his death
 			Global.levelHeight = xml.height;
-			
-			//add the tileset to the world
+
 			add(new Entity(0, 0, tileset = new Tilemap(Assets.TILESET, FP.width, FP.height, 
 				Global.grid, Global.grid)));
 			
@@ -172,6 +171,20 @@ package com.newton.worlds
 			{ 
 				Global.door = new Door(o.@x, o.@y, true);
 				this.add(Global.door);
+			}
+			
+			for each (o in xml.entities[0].tree) 
+			{
+				var treeImg:Image = new Image(Assets.TREE);
+				treeImg.x = o.@x;
+				treeImg.y = o.@y;
+				treeImg.y += 1;
+				FP.world.addGraphic(treeImg);
+			}
+			
+			for each (o in xml.entities[0].sign) 
+			{
+				add(new DirectionSign(o.@x, o.@y, o.@text));
 			}
 			
 			add(Global.player = new Player(xml.entities[0].player.@x, xml.entities[0].player.@y));
@@ -259,7 +272,7 @@ package com.newton.worlds
 		
 		public function nextlevel():void
 		{
-			// removeAll();
+			removeAll();
 			
 			if(Global.level < Assets.LEVELS.length) 
 			{	

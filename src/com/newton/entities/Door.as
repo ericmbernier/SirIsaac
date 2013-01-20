@@ -28,7 +28,7 @@ package com.newton.entities
 		
 		public function Door(x:int, y:int, locked:Boolean) 
 		{
-			super(x, y - 32);
+			super(x, y - 30);
 			
 			locked_ = locked;
 			

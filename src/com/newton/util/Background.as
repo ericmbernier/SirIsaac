@@ -14,6 +14,11 @@ package com.newton.util
 		{	
 			var bg:Class = Assets.SKY_BG;
 			
+			if (type == Global.TV_SCAN)
+			{
+				bg = Assets.TV_SCAN;
+			}
+			
 			super(bg, true, true);
 		}
 		

@@ -72,6 +72,8 @@ package com.newton
 			view:View,
 			bg:Background,
 			bgEntity:Entity,
+			tvBg:Background,
+			tvBgEntity:Entity,
 			
 			muteBtn:Button,
 			muteBtnTxt:TextButton,
@@ -118,6 +120,7 @@ package com.newton
 			PLAYER_DEATH_HEIGHT:uint = 525,
 			
             APPLE_TYPE:String = "APPLE",
+			DIRECTION_SIGN_TYPE = "DIRECTION_SIGN",
 			ENEMY_TYPE:String = "ENEMY",			
 			GROUND_TYPE:String = "GROUND",
 			DOOR_KEY_TYPE:String = "KEY",

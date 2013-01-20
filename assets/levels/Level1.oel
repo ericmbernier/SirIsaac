@@ -2,81 +2,65 @@
   <width>640</width>
   <height>480</height>
   <outdoorTileset set="tileset">
-    <tile tx="30" ty="0" x="0" y="420"/>
-    <tile tx="30" ty="0" x="30" y="420"/>
-    <tile tx="30" ty="0" x="60" y="420"/>
-    <tile tx="30" ty="0" x="90" y="420"/>
-    <tile tx="30" ty="0" x="120" y="420"/>
-    <tile tx="30" ty="0" x="150" y="420"/>
-    <tile tx="30" ty="0" x="240" y="420"/>
-    <tile tx="30" ty="0" x="270" y="420"/>
-    <tile tx="30" ty="0" x="300" y="420"/>
-    <tile tx="30" ty="0" x="330" y="420"/>
-    <tile tx="30" ty="0" x="360" y="420"/>
-    <tile tx="30" ty="0" x="390" y="420"/>
-    <tile tx="30" ty="0" x="420" y="420"/>
-    <tile tx="30" ty="0" x="450" y="420"/>
-    <tile tx="30" ty="0" x="480" y="420"/>
-    <tile tx="90" ty="30" x="510" y="420"/>
-    <tile tx="90" ty="30" x="510" y="360"/>
-    <tile tx="90" ty="30" x="510" y="330"/>
-    <tile tx="90" ty="30" x="540" y="330"/>
-    <tile tx="90" ty="30" x="600" y="330"/>
-    <tile tx="90" ty="30" x="630" y="330"/>
-    <tile tx="90" ty="30" x="630" y="360"/>
-    <tile tx="90" ty="30" x="630" y="390"/>
-    <tile tx="90" ty="30" x="630" y="420"/>
-    <tile tx="90" ty="30" x="630" y="450"/>
-    <tile tx="90" ty="30" x="600" y="450"/>
-    <tile tx="90" ty="30" x="570" y="450"/>
-    <tile tx="90" ty="30" x="570" y="420"/>
-    <tile tx="90" ty="30" x="540" y="420"/>
-    <tile tx="90" ty="30" x="510" y="390"/>
-    <tile tx="90" ty="30" x="540" y="360"/>
-    <tile tx="90" ty="30" x="540" y="390"/>
-    <tile tx="90" ty="30" x="600" y="360"/>
-    <tile tx="90" ty="30" x="600" y="390"/>
-    <tile tx="90" ty="30" x="600" y="420"/>
-    <tile tx="90" ty="30" x="540" y="450"/>
-    <tile tx="90" ty="30" x="510" y="450"/>
-    <tile tx="90" ty="30" x="480" y="450"/>
-    <tile tx="90" ty="30" x="450" y="450"/>
-    <tile tx="90" ty="30" x="420" y="450"/>
-    <tile tx="90" ty="30" x="390" y="450"/>
-    <tile tx="90" ty="30" x="360" y="450"/>
-    <tile tx="90" ty="30" x="330" y="450"/>
-    <tile tx="90" ty="30" x="300" y="450"/>
-    <tile tx="90" ty="30" x="270" y="450"/>
-    <tile tx="90" ty="30" x="240" y="450"/>
-    <tile tx="90" ty="30" x="210" y="450"/>
-    <tile tx="90" ty="30" x="570" y="330"/>
-    <tile tx="90" ty="30" x="570" y="360"/>
-    <tile tx="90" ty="30" x="570" y="390"/>
-    <tile tx="90" ty="30" x="180" y="450"/>
-    <tile tx="90" ty="30" x="150" y="450"/>
-    <tile tx="90" ty="30" x="120" y="450"/>
-    <tile tx="90" ty="30" x="90" y="450"/>
-    <tile tx="90" ty="30" x="60" y="450"/>
-    <tile tx="90" ty="30" x="30" y="450"/>
-    <tile tx="90" ty="30" x="0" y="450"/>
-    <tile tx="60" ty="0" x="210" y="420"/>
-    <tile tx="60" ty="0" x="180" y="420"/>
-    <tile tx="60" ty="0" x="510" y="300"/>
-    <tile tx="60" ty="0" x="540" y="300"/>
-    <tile tx="60" ty="0" x="570" y="300"/>
-    <tile tx="60" ty="0" x="600" y="300"/>
-    <tile tx="60" ty="0" x="630" y="300"/>
+    <tile tx="30" ty="0" x="0" y="450"/>
+    <tile tx="30" ty="0" x="30" y="450"/>
+    <tile tx="30" ty="0" x="60" y="450"/>
+    <tile tx="30" ty="0" x="90" y="450"/>
+    <tile tx="30" ty="0" x="120" y="450"/>
+    <tile tx="30" ty="0" x="150" y="450"/>
+    <tile tx="30" ty="0" x="180" y="450"/>
+    <tile tx="30" ty="0" x="210" y="450"/>
+    <tile tx="30" ty="0" x="240" y="450"/>
+    <tile tx="30" ty="0" x="270" y="450"/>
+    <tile tx="30" ty="0" x="300" y="450"/>
+    <tile tx="30" ty="0" x="330" y="450"/>
+    <tile tx="30" ty="0" x="360" y="450"/>
+    <tile tx="30" ty="0" x="390" y="450"/>
+    <tile tx="30" ty="0" x="420" y="450"/>
+    <tile tx="30" ty="0" x="450" y="450"/>
+    <tile tx="120" ty="0" x="540" y="330"/>
+    <tile tx="120" ty="0" x="570" y="330"/>
+    <tile tx="120" ty="0" x="600" y="330"/>
+    <tile tx="120" ty="0" x="630" y="330"/>
+    <tile tx="120" ty="0" x="480" y="450"/>
+    <tile tx="120" ty="0" x="510" y="450"/>
+    <tile tx="60" ty="30" x="540" y="360"/>
+    <tile tx="60" ty="30" x="540" y="390"/>
+    <tile tx="60" ty="30" x="540" y="420"/>
+    <tile tx="60" ty="30" x="540" y="450"/>
+    <tile tx="60" ty="30" x="570" y="450"/>
+    <tile tx="60" ty="30" x="600" y="450"/>
+    <tile tx="60" ty="30" x="630" y="450"/>
+    <tile tx="60" ty="30" x="630" y="420"/>
+    <tile tx="60" ty="30" x="630" y="390"/>
+    <tile tx="60" ty="30" x="630" y="360"/>
+    <tile tx="60" ty="30" x="600" y="360"/>
+    <tile tx="60" ty="30" x="570" y="360"/>
+    <tile tx="60" ty="30" x="570" y="390"/>
+    <tile tx="60" ty="30" x="570" y="420"/>
+    <tile tx="60" ty="30" x="600" y="420"/>
+    <tile tx="60" ty="30" x="600" y="390"/>
   </outdoorTileset>
   <entities>
-    <player x="32" y="392"/>
-    <door x="576" y="256"/>
-    <apple x="128" y="376"/>
-    <apple x="208" y="360"/>
-    <apple x="280" y="384"/>
+    <tree x="96" y="368"/>
+    <tree x="280" y="368"/>
+    <player x="16" y="416"/>
+    <sign x="64" y="424" text="Test
+ Test new line"/>
+    <sign x="216" y="424" text="Test again
+ and another new line"/>
+    <sign x="392" y="424" text="Last text
+ I swear"/>
+    <apple x="448" y="412"/>
+    <apple x="496" y="392"/>
+    <door x="576" y="296"/>
   </entities>
   <floors>
-    <rect x="0" y="424" w="520" h="8"/>
-    <rect x="512" y="304" w="128" h="8"/>
-    <rect x="512" y="312" w="8" h="112"/>
+    <rect x="0" y="0" w="640" h="8"/>
+    <rect x="0" y="8" w="8" h="448"/>
+    <rect x="8" y="448" w="536" h="8"/>
+    <rect x="536" y="328" w="104" h="8"/>
+    <rect x="536" y="336" w="8" h="112"/>
+    <rect x="632" y="8" w="8" h="320"/>
   </floors>
 </level>

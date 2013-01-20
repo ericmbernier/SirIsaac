@@ -43,6 +43,10 @@ package com.newton
 		[Embed(source = '../assets/graphics/mute.png')] public static const MUTE_BTN:Class;
 		[Embed(source = '../assets/graphics/unmute.png')] public static const UNMUTE_BTN:Class;
 		[Embed(source = '../assets/graphics/sky.png')] public static const SKY_BG:Class;
+		[Embed(source = '../assets/graphics/tvScan.png')] public static const TV_SCAN:Class;
+		[Embed(source = '../assets/graphics/sign.png')] public static const DIR_SIGN:Class;
+		[Embed(source = '../assets/graphics/dirBg.png')] public static const DIR_BG:Class;
+		[Embed(source = '../assets/graphics/tree.png')] public static const TREE:Class;
 		
 		// Platforms and Objects
 		[Embed(source = '../assets/graphics/crate.png')] public static const OBJECT_CRATE:Class;	
@@ -76,7 +80,7 @@ package com.newton
 		[Embed(source = '../assets/sound/buttonSelect.mp3')] public static const SND_BUTTON_BACK:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_BUTTON_HOVER:Class;
 		[Embed(source = '../assets/sound/buttonSelect.mp3')] public static const SND_BUTTON_SELECT:Class;
-		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_DEATH:Class;
+		[Embed(source = '../assets/sound/buttonSelect.mp3')] public static const SND_DEATH:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_DOOR:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_JUMP:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_KEY:Class;
