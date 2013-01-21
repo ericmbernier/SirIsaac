@@ -273,6 +273,7 @@ package com.newton.worlds
 		public function nextlevel():void
 		{
 			removeAll();
+			Global.appleVal = 0;
 			
 			if(Global.level < Assets.LEVELS.length) 
 			{	

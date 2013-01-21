@@ -93,13 +93,13 @@
   </outdoorTileset>
   <entities>
     <player x="24" y="240"/>
-    <door x="560" y="240"/>
     <sign x="112" y="248"/>
-    <apple x="184" y="415"/>
-    <apple x="424" y="415"/>
-    <apple x="344" y="415"/>
-    <apple x="264" y="415"/>
+    <apple x="184" y="400"/>
+    <apple x="424" y="400"/>
+    <apple x="344" y="400"/>
+    <apple x="264" y="400"/>
     <tree x="488" y="192"/>
+    <door x="558" y="238"/>
   </entities>
   <floors>
     <rect x="0" y="0" w="640" h="8"/>

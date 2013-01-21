@@ -14,12 +14,12 @@
   <entities>
     <player x="32" y="416"/>
     <apple x="192" y="408"/>
-    <door x="584" y="416"/>
     <apple x="248" y="392"/>
     <apple x="304" y="384"/>
     <apple x="360" y="384"/>
     <apple x="456" y="416"/>
     <apple x="408" y="392"/>
+    <door x="574" y="418"/>
   </entities>
   <floors>
     <rect x="0" y="0" w="640" h="8"/>

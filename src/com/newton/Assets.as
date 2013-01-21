@@ -16,10 +16,9 @@ package com.newton
 		[Embed(source = '../assets/levels/Level7.oel',  mimeType = "application/octet-stream")] public static const LEVEL7:Class;
 		[Embed(source = '../assets/levels/Level8.oel',  mimeType = "application/octet-stream")] public static const LEVEL8:Class;
 		[Embed(source = '../assets/levels/Level9.oel',  mimeType = "application/octet-stream")] public static const LEVEL9:Class;
-		[Embed(source = '../assets/levels/Level10.oel',  mimeType = "application/octet-stream")] public static const LEVEL10:Class;
 		
 		public static const LEVELS:Array = new Array(LEVEL1, LEVEL2, LEVEL3, LEVEL4, LEVEL5,
-				LEVEL6, LEVEL7, LEVEL8, LEVEL9, LEVEL10);
+				LEVEL6, LEVEL7, LEVEL8, LEVEL9);
 		
 		// TitleWorld art and logos
 		[Embed(source = '../assets/graphics/ebLogo.png')] public static const EB_LOGO:Class;

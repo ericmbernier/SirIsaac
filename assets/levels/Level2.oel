@@ -25,8 +25,8 @@
     <player x="24" y="416"/>
     <apple x="352" y="408"/>
     <tree x="576" y="368"/>
-    <door x="536" y="416"/>
     <sign x="120" y="424"/>
+    <door x="520" y="416"/>
   </entities>
   <floors>
     <rect x="0" y="0" w="640" h="8"/>

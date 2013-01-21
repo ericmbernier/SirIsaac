@@ -45,13 +45,10 @@
     <tree x="96" y="368"/>
     <tree x="280" y="368"/>
     <player x="16" y="416"/>
-    <sign x="64" y="424" text="Test
- Test new line"/>
-    <sign x="216" y="424" text="Test again
- and another new line"/>
-    <sign x="392" y="424" text="Last text
- I swear"/>
-    <apple x="448" y="412"/>
+    <sign x="64" y="424"/>
+    <sign x="216" y="424"/>
+    <sign x="392" y="424"/>
+    <apple x="448" y="392"/>
     <apple x="496" y="392"/>
     <door x="576" y="296"/>
   </entities>
