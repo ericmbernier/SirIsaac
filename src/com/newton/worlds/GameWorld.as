@@ -209,31 +209,6 @@ package com.newton.worlds
 				add(new Solid(o.@x, o.@y, o.@w, o.@h));
 			}
 			
-			for each (o in xml.entities[0].platformNormal)
-			{
-				add(new Platform(o.@x, o.@y));
-			}
-			
-			for each (o in xml.entities[0].crate) 
-			{ 
-				add(new Crate(o.@x, o.@y)); 
-			}
-			
-			for each (o in xml.entities[0].platformHorizontal) 
-			{ 
-				add(new PlatformHorizontal(o.@x, o.@y)); 
-			}
-			
-			for each (o in xml.entities[0].platformVertical) 
-			{ 
-				add(new PlatformVertical(o.@x, o.@y)); 
-			}
-			
-			for each (o in xml.entities[0].key) 
-			{
-				add(new DoorKey(o.@x, o.@y));
-			}
-			
 			for each (o in xml.entities[0].apple) 
 			{
 				add(new Apple(o.@x, o.@y));

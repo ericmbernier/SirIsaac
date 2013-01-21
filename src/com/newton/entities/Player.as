@@ -226,7 +226,6 @@ package com.newton.entities
 			}
 			
 			this.collectApples();
-			this.collectKey();
 		}	
         
 		
@@ -272,18 +271,7 @@ package com.newton.entities
 				apple.collect();
 			}
 		}
-
-       
-		private function collectKey():void
-		{
-			var key:DoorKey = collide(Global.DOOR_KEY_TYPE, x, y) as DoorKey;
-			
-			if (key)
-			{
-				key.collect();
-			}
-		}
-			
+		
 		
 		public function bounce():void
 		{

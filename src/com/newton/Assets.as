@@ -47,26 +47,17 @@ package com.newton
 		[Embed(source = '../assets/graphics/dirBg.png')] public static const DIR_BG:Class;
 		[Embed(source = '../assets/graphics/tree.png')] public static const TREE:Class;
 		
-		// Platforms and Objects
-		[Embed(source = '../assets/graphics/crate.png')] public static const OBJECT_CRATE:Class;	
-		[Embed(source = '../assets/graphics/platformHorizontal.png')] public static const OBJECT_PLATFORM_HORIZONTAL:Class;
-		[Embed(source = '../assets/graphics/platformNormal.png')] public static const OBJECT_PLATFORM_NORMAL:Class;
-		[Embed(source = '../assets/graphics/platformVertical.png')] public static const OBJECT_PLATFORM_VERTICAL:Class;        
+		// Platforms and Objects     
         [Embed(source = '../assets/graphics/door.png')] public static const OBJECT_DOOR:Class;
 		
 		// Collectables
 		[Embed(source = '../assets/graphics/apple.png')] public static const APPLE:Class;
-		[Embed(source = '../assets/graphics/key.png')] public static const COLLECT_KEY:Class;
 		
 		// Player
 		[Embed(source = '../assets/graphics/newtonSprite.png')] public static const NEWTON:Class;
 		
 		// Effects
 		[Embed(source = '../assets/graphics/newtonBlur.png')] public static const EFFECTS_DASH_BLUR:Class;
-		
-		// Enemies
-		
-		// Intro
 		
 		// Music
 		[Embed(source = '../assets/music/MorningMood.mp3')] public static const MUS_MENU:Class;
