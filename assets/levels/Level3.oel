@@ -93,11 +93,13 @@
   </outdoorTileset>
   <entities>
     <player x="24" y="240"/>
-    <sign x="112" y="248"/>
-    <apple x="184" y="400"/>
-    <apple x="424" y="400"/>
-    <apple x="344" y="400"/>
-    <apple x="264" y="400"/>
+    <sign x="112" y="248" text="Thou will be adored by all!
+Pay special attention to your apple meter above.
+Jumping in mid-air consumes an apple. Hurry along now!" />
+    <apple x="184" y="422"/>
+    <apple x="424" y="422"/>
+    <apple x="344" y="422"/>
+    <apple x="264" y="422"/>
     <tree x="488" y="192"/>
     <door x="558" y="238"/>
   </entities>

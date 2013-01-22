@@ -25,7 +25,9 @@
     <player x="24" y="416"/>
     <apple x="352" y="408"/>
     <tree x="576" y="368"/>
-    <sign x="120" y="424"/>
+    <sign x="120" y="424" text="Thou has made an amazing discovery!
+Eating apples helps thou temporarily defy gravity!
+Quick, runeth off and tell the others!" />
     <door x="520" y="416"/>
     <tree x="166" y="368"/>
   </entities>

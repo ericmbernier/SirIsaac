@@ -2,16 +2,16 @@ package com.newton.worlds
 {
 	import Playtomic.*;
 	
-	import com.newton.Assets;
-	import com.newton.Global;
-	import com.newton.util.Background;
-	import com.newton.util.Button;
-	import com.newton.util.TextButton;
 	import com.greensock.TweenMax;
 	import com.greensock.easing.Back;
 	import com.greensock.easing.Cubic;
 	import com.greensock.easing.Quad;
 	import com.greensock.plugins.TransformMatrixPlugin;
+	import com.newton.Assets;
+	import com.newton.Global;
+	import com.newton.util.Background;
+	import com.newton.util.Button;
+	import com.newton.util.TextButton;
 	
 	import flash.geom.ColorTransform;
 	import flash.geom.Rectangle;
@@ -21,7 +21,7 @@ package com.newton.worlds
 	import flash.net.navigateToURL;
 	
 	import net.flashpunk.Entity;
-	import net.flashpunk.FP; 
+	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.World;
@@ -84,6 +84,8 @@ package com.newton.worlds
 			Global.gameMusic.stop();
 			Global.endMusic.stop();
 			Global.menuMusic.loop(Global.musicVolume);
+			
+			Global.paused = false;
 			
 			titleLogo_.x = 140;
 			titleLogo_.y = 40;
@@ -215,8 +217,20 @@ package com.newton.worlds
 			var bobUp:Boolean = true;
 			levelSelectEntities_ = new Array();
 			
+			if (levelsToAdd > Global.NUM_LEVELS)
+			{
+				levelsToAdd = Global.NUM_LEVELS;
+			}
+			else if (levelsToAdd <= 0)
+			{
+				levelsToAdd = 1;
+				lockedLevels = Global.NUM_LEVELS - levelsToAdd;
+			}
+			
+			FP.console.log(levelsToAdd);
+			
 			// Add all of the level select buttons
-			for (var i:int = 0; i < levelsToAdd - 1; i++)
+			for (var i:int = 0; i < levelsToAdd; i++)
 			{
 				var levelNum:int = i + 1;
 				var levelTxt:Text = new Text(levelNum.toString(), 0, 0, {outlineColor:0x000000, outlineStrength:2});
@@ -252,10 +266,10 @@ package com.newton.worlds
 			
 			for (var j:int = 0; j < lockedLevels; j++)
 			{
-				var question:Text = new Text("?");
+				var question:Text = new Text("?", 0, 0, {outlineColor:0x000000, outlineStrength:2});
 				question.color = 0xFFFFFF;
 				question.size = 28;
-				question.font = "LuckiestGuy";
+				question.font = "Essays";
 				
 				var lockedBtn:TextButton = new TextButton(question, xBuffer, yBuffer, 32, 32);
 				lockedBtn.setHitbox(0, 0);
@@ -263,11 +277,11 @@ package com.newton.worlds
 				
 				var levelChecker:int = levelsToAdd + j + 1;
 				
-				var ldiff:int = i % 6;
-				if (ldiff == 5)
+				var ldiff:int = i % 3;
+				if (ldiff == 2)
 				{
-					xBuffer = 30;
-					yBuffer += 35;
+					xBuffer = 260;
+					yBuffer += 45;
 				}
 				else
 				{

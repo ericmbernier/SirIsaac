@@ -20,6 +20,9 @@
     <apple x="456" y="416"/>
     <apple x="408" y="392"/>
     <door x="574" y="418"/>
+    <sign x="84" y="424" text="Will the others mock my work in math and physics
+you wondered? Well wonder no more, for you will be 
+praised for these apples!"/>
   </entities>
   <floors>
     <rect x="0" y="0" w="8" h="456"/>

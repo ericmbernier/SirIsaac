@@ -112,6 +112,7 @@
     <tree x="344" y="160"/>
     <player x="14" y="416"/>
     <apple x="276" y="338"/>
+    <apple x="218" y="394"/>
   </entities>
   <floors>
     <rect x="0" y="0" w="8" h="456"/>

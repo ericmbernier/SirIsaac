@@ -45,9 +45,12 @@
     <tree x="96" y="368"/>
     <tree x="280" y="368"/>
     <player x="16" y="416"/>
-    <sign x="64" y="424"/>
-    <sign x="216" y="424"/>
-    <sign x="392" y="424"/>
+    <sign x="64" y="424" text="Welcome Sir Isaac!
+Walketh with the arrow or WASD keys!" />
+    <sign x="216" y="424" text="Gravity sure is annoying!
+Jumpeth with Up or W!" />
+    <sign x="392" y="424" text="Delicious apples!
+Eat one, then presseth jump again whilst in mid-air!"/>
     <apple x="448" y="392"/>
     <apple x="496" y="392"/>
     <door x="576" y="296"/>

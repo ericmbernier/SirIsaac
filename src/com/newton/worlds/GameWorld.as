@@ -43,7 +43,7 @@ package com.newton.worlds
 	public class GameWorld extends World
 	{		
 		private var tileset:Tilemap;
-		private var reset:int = 30;
+		private var reset:int = 20;
 		private var levelTxt_:Text;
 		private var directionsArray_:Array;
 		private var addLevelComplete_:Boolean = true;
@@ -115,7 +115,7 @@ package com.newton.worlds
 				{
 					restartlevel();
 					Global.restart = false;
-					reset = 30;
+					reset = 20;
 				}
 			}
 			
