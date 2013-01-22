@@ -10,7 +10,6 @@ package com.newton.worlds
 	import com.newton.Assets;
 	import com.newton.Global;
 	import com.newton.entities.*;
-	import com.newton.entities.platforms.*;
 	import com.newton.entities.solids.*;
 	import com.newton.util.Background;
 	import com.newton.util.Button;
@@ -130,6 +129,11 @@ package com.newton.worlds
 			}
 		}
 		
+		
+		override public function render():void
+		{
+			super.render();
+		}
 	
 		public function loadlevel():void 
 		{	

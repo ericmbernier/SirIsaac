@@ -13,6 +13,7 @@ package com.newton.entities
 	import net.flashpunk.Sfx;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.tweens.sound.SfxFader;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
@@ -27,6 +28,7 @@ package com.newton.entities
 		private const HEIGHT:int = 32;
 		private const APPLE_JUMP:int = 25;
 		private const JUMP:int = 8;
+		private const ENDING_X:int = 498;
 		
 		private var sprite:Spritemap = new Spritemap(Assets.NEWTON, WIDTH, HEIGHT, null);
 		private var movement:Number = 1;
@@ -34,7 +36,8 @@ package com.newton.entities
 		// Current player direction (true = right, false = left)
 		private var direction_:Boolean = true;
 	
-		public var onGround_:Boolean = false;		
+		public var onGround_:Boolean = false;
+		public var ending_:Boolean = false;
 		private var dead:Boolean = false;
 		private var start:Point;
 		private var apples_:Boolean = false;
@@ -58,6 +61,7 @@ package com.newton.entities
 			// Set up animations
 			sprite.add("standLeft", [0, 12], 1, true);
 			sprite.add("standRight", [0, 12], 1, true);
+			sprite.add("idleRight", [0], 1, true);
 			sprite.add("walkLeft", [0, 4, 8, 12, 1], 8, true);
 			sprite.add("walkRight", [0, 4, 8, 12, 1], 8, true);
 			
@@ -74,11 +78,11 @@ package com.newton.entities
 		
 		override public function update():void 
 		{
-			if (dead) 
-			{ 
-				sprite.alpha -= 0.1; 
-				return; 
-			} 
+			if (ending_)
+			{
+				sprite.play("idleRight");
+				return;
+			}
 			else if (sprite.alpha < 1) 
 			{ 
 				sprite.alpha += 0.1 
@@ -123,7 +127,7 @@ package com.newton.entities
                 var jumped:Boolean = false;
                 
                 // Normal jump
-                if (onGround_) 
+                if (onGround_ && Global.level < Global.NUM_LEVELS) 
                 { 
                     speed_.y = -JUMP; 
                     jumped = true;
@@ -226,6 +230,16 @@ package com.newton.entities
 			}
 			
 			this.collectApples();
+			
+			// Check if the game is ending. This is quite the hack, and if I wanted to
+			// take the time I would have created an EndingWorld that handled all of this better
+			if (Global.level == Global.NUM_LEVELS)
+			{
+				if (this.x >= ENDING_X)
+				{
+					ending_ = true;
+				}
+			}
 		}	
         
 		

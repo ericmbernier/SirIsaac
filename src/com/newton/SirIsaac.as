@@ -99,6 +99,8 @@ package com.newton
 		
 		private function init():void
 		{	
+			this.addChild(bgImg_);
+			
 			sw = stage.stageWidth;
 			sh = stage.stageHeight;
 			
@@ -106,8 +108,6 @@ package com.newton
 			h = PROGRESS_BAR_HEIGHT;
 			
 			stage.addEventListener(Event.ENTER_FRAME, onEnterFrame);
-			
-			this.addChild(bgImg_);
 			
 			this.addChild(logo_);
 			logo_.x = 160;

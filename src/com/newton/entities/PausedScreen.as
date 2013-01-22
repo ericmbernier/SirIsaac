@@ -102,6 +102,7 @@ package com.newton.entities
 			TweenMax.to(dTxt_, 0.3, {y: dTxt_.y + 5, repeat: -1, yoyo:true, delay:1.0, ease:Quad.easeInOut});
 			
 			enterTxt_.visible = true;
+			quitTxt_.visible = true;
 			
 			if (Global.musicVolume > 0)
 			{
@@ -123,6 +124,7 @@ package com.newton.entities
 			dTxt_.visible = false;
 			
 			enterTxt_.visible = false;
+			quitTxt_.visible = false;
 			
 			if (Global.musicVolume > 0)
 			{

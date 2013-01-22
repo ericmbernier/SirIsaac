@@ -29,7 +29,7 @@
 		public function Main():void 
 		{
 			super(WIDTH, HEIGHT, FPS, false);
-			FP.console.enable();
+			// FP.console.enable();
 		}
 		
 

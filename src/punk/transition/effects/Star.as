@@ -1,5 +1,7 @@
 package punk.transition.effects
 {
+	import com.newton.Global;
+	
 	import flash.display.*;
 	import flash.geom.Rectangle;
 	import net.flashpunk.*;
@@ -30,12 +32,18 @@ package punk.transition.effects
 		{
 			super();
 				
-			if (options) {
+			if (options) 
+			{
 				if (options.hasOwnProperty("color")) 		_color 		= options.color;
 				if (options.hasOwnProperty("duration")) 	_duration 	= options.duration;
 				if (options.hasOwnProperty("startX")) 		_startX 	= options.startX;
 				if (options.hasOwnProperty("startY")) 		_startY 	= options.startY;
-				if (options.hasOwnProperty("track")) 		_track 		= options.track;
+				
+				if (options.hasOwnProperty("track")) 		
+				{
+					_track = options.track;
+				}
+				
 				if (options.hasOwnProperty("offset")) 		_offset 	= options.offset;
 			}
 			
@@ -63,15 +71,15 @@ package punk.transition.effects
 			
 			// Draw Star
 			_tempSprite.graphics.beginFill(0xFF0000, 1);
-			if(FP.world.hasOwnProperty(_track))
+			if(_track == Global.PLAYER_TYPE && Global.level == Global.NUM_LEVELS)
 			{
 				if(_offset) 
 				{
-					Drawing.drawStar(_tempSprite.graphics, FP.world[_track].x - FP.camera.x, FP.world[_track].y - FP.camera.y, _scale, _scale*2);
+					Drawing.drawStar(_tempSprite.graphics, Global.player.x - FP.camera.x, Global.player.y - FP.camera.y, _scale, _scale*2);
 				} 
 				else
 				{
-					Drawing.drawStar(_tempSprite.graphics, FP.world[_track].x, FP.world[_track].y, _scale, _scale*2);					
+					Drawing.drawStar(_tempSprite.graphics, Global.player.x, Global.player.y, _scale, _scale*2);					
 				}
 			}			
 			else

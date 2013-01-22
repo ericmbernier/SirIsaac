@@ -58,18 +58,6 @@ package com.newton.worlds
 		private var levelSelTxt_:Text = new Text("Select Your Level!", 220, 150, {size:26, color:0xFFFFFF, visible:false,
 			font:"Essays", outlineColor:0x000000, outlineStrength:2});
 		
-		// Text graphics on the credits screen
-		private var creditsDesc_:Text = new Text("Programming, and design by", 
-			190, 90, {size:20, visible:false, color:0x000000, font:"Essays"});
-		private var creditsName_:Text = new Text("Eric Bernier", 
-			245, 110, {size:24, visible:false, color:0x000000, font:"Essays"});
-		private var creditsSite_:Text = new Text("www.ericbernier.com", 
-			220, 130, {size:20, visible:false, color:0x000000, font:"Essays"});
-		private var creditsArt_:Text = new Text("In-game art provided by opengameart.org.  Title screen clipart is public domain", 
-			175, 155, {size:20, visible:false, color:0x000000, font:"Essays"});
-		private var creditsMusic_:Text = new Text("Royalty Free Classical music provided by royaltyfreemusic.com", 
-			125, 180, {size:20, visible:false, color:0x000000, font:"Essays"});
-		
 		// Buttons on the title screen
 		private var playGameBtn_:TextButton;
 		private var creditsBtn_:TextButton;
@@ -94,7 +82,8 @@ package com.newton.worlds
 		public function TitleWorld() 
 		{
 			Global.gameMusic.stop();
-			Global.menuMusic.loop(Global.musicVolume * 0.85);
+			Global.endMusic.stop();
+			Global.menuMusic.loop(Global.musicVolume);
 			
 			titleLogo_.x = 140;
 			titleLogo_.y = 40;
@@ -142,15 +131,7 @@ package com.newton.worlds
 			
 			creditsBg_.x = 85;
 			creditsBg_.y = Global.GAME_HEIGHT + 15;
-			creditsBg_.scale = 0.75;
 			this.addGraphic(creditsBg_);
-			
-			// Add all of the credits graphics
-			this.addGraphic(creditsDesc_);
-			this.addGraphic(creditsName_);
-			this.addGraphic(creditsSite_);
-			this.addGraphic(creditsArt_);
-			this.addGraphic(creditsMusic_);
 			
 			muteHover_.scale = 1.025;
 			muteHover_.updateBuffer();
@@ -226,7 +207,7 @@ package com.newton.worlds
 			creditsBtn_.visible = false;
 			isaacNewton_.visible = false;
 			
-			var levelsToAdd:int =  Global.NUM_LEVELS // Global.shared.data.level;
+			var levelsToAdd:int =  Global.shared.data.level; // Global.NUM_LEVELS;
 			var lockedLevels:int = Global.NUM_LEVELS - levelsToAdd;
 			
 			var xBuffer:int = 260;
@@ -235,7 +216,7 @@ package com.newton.worlds
 			levelSelectEntities_ = new Array();
 			
 			// Add all of the level select buttons
-			for (var i:int = 0; i < levelsToAdd; i++)
+			for (var i:int = 0; i < levelsToAdd - 1; i++)
 			{
 				var levelNum:int = i + 1;
 				var levelTxt:Text = new Text(levelNum.toString(), 0, 0, {outlineColor:0x000000, outlineStrength:2});
@@ -325,12 +306,6 @@ package com.newton.worlds
 			TweenMax.to(darkScreen_, 0.75, {alpha:0.75, repeat: 0, yoyo:false, ease:Quad.easeIn});
 			TweenMax.to(creditsBg_, 1.0, {y: 20, repeat:0, yoyo:false, ease:Back.easeOut});
 			
-			creditsDesc_.visible = true;
-			creditsName_.visible = true;
-			creditsSite_.visible = true;
-			creditsArt_.visible = true;
-			creditsMusic_.visible = true;
-			
 			if (backBtn_ != null)
 			{
 				this.remove(backBtn_);
@@ -346,7 +321,7 @@ package com.newton.worlds
 			backTxtHover_.width = FP.width;
 			backTxtHover_.y = 0;
 			
-			backBtn_ = new TextButton(backTxt_, 260, 400, 110, 30, backToTitle);
+			backBtn_ = new TextButton(backTxt_, 260, 440, 110, 30, backToTitle);
 			backBtn_.normal = backTxt_;
 			backBtn_.hover = backTxtHover_;
 			backBtn_.setHitbox(120, 30);
@@ -374,12 +349,6 @@ package com.newton.worlds
 			{
 				TweenMax.to(darkScreen_, 0.50, {alpha:0, repeat: 0, yoyo:false, ease:Quad.easeIn});
 				TweenMax.to(creditsBg_, 0.50, {y: Global.GAME_HEIGHT + 15, repeat:0, yoyo:false, ease:Back.easeIn});
-				
-				creditsDesc_.visible = false;
-				creditsName_.visible = false;
-				creditsSite_.visible = false;
-				creditsArt_.visible = false;
-				creditsMusic_.visible = false;
 				this.remove(backBtn_);
 				
 				viewingCredits_ = false;

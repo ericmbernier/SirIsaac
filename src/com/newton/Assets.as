@@ -24,9 +24,12 @@ package com.newton
 		[Embed(source = '../assets/graphics/ebLogo.png')] public static const EB_LOGO:Class;
 		[Embed(source = '../assets/graphics/titleBg.png')] public static const TITLE_BG:Class;
 		[Embed(source = '../assets/graphics/titleLogo.png')] public static const TITLE_LOGO:Class;
-		[Embed(source = '../assets/graphics/parchment.png')] public static const TITLE_CREDITS_BG:Class;
+		[Embed(source = '../assets/graphics/credits.png')] public static const TITLE_CREDITS_BG:Class;
 		[Embed(source = '../assets/graphics/buffer.png')] public static const TITLE_BUFFER:Class;
 		[Embed(source = '../assets/graphics/isaacNewton.png')] public static const TITLE_ISAAC_NEWTON:Class;
+		
+		// Ending
+		[Embed(source = '../assets/graphics/endingScreen.png')] public static const END_SCREEN:Class;
 		
 		// Tilesets
 		[Embed(source = '../assets/graphics/tileset.png')] public static const TILESET:Class;
@@ -62,10 +65,11 @@ package com.newton
 		// Music
 		[Embed(source = '../assets/music/MorningMood.mp3')] public static const MUS_MENU:Class;
 		[Embed(source = '../assets/music/swanLake.mp3')] public static const MUS_GAME:Class;
-		[Embed(source = '../assets/music/happyBear.mp3')] public static const MUS_ENDING:Class;
+		[Embed(source = '../assets/music/egyptionMarch.mp3')] public static const MUS_ENDING:Class;
 		
 		// Sound
 		[Embed(source = '../assets/sound/appleBite.mp3')] public static const SND_APPLE:Class;
+		[Embed(source = '../assets/sound/appleHurt.mp3')] public static const SND_APPLE_HURT:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_APPLE_JUMP:Class;
 		[Embed(source = '../assets/sound/buttonSelect.mp3')] public static const SND_BUTTON_BACK:Class;
 		[Embed(source = '../assets/sound/buttonHover.mp3')] public static const SND_BUTTON_HOVER:Class;
