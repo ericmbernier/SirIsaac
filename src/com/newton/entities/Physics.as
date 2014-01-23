@@ -8,10 +8,6 @@ package com.newton.entities
 	import net.flashpunk.FP;
 	
 	
-	/**
-	 * 
-	 * @author Eric Bernier
-	 */
 	public class Physics extends Entity
 	{		
 		// TODO: Format variables and make speeds global variables and not hard-coded values        
