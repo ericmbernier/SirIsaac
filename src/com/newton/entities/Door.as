@@ -11,11 +11,7 @@ package com.newton.entities
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
 
-	
-	/**
-	 * 
-	 * @author Eric Bernier
-	 */
+
 	public class Door extends Entity
 	{
 		private var sprite_:Image = new Image(Assets.OBJECT_DOOR, new Rectangle(0, 0, 32, 64));
